@@ -21,3 +21,9 @@ class template(BaseModel):
     description : str
     category : str
     structure : templatestructure 
+
+class templateCreate(template):
+    pass
+
+class templateOut(templateCreate):
+    id : str
