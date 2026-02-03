@@ -22,8 +22,3 @@ class template(BaseModel):
     category : str
     structure : templatestructure 
 
-class templateCreate(template):
-    pass
-
-class templateOut(templateCreate):
-    id : str
