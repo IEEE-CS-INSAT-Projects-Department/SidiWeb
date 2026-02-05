@@ -2,7 +2,21 @@ from pydantic_settings import BaseSettings
 from typing import Optional
 from pydantic import ConfigDict, Field
 
-class Settings(BaseSettings):    
+class Settings(BaseSettings):
+    """
+    Classe de configuration principale de l'application.
+
+    Cette classe regroupe tous les paramètres de configuration
+    nécessaires au fonctionnement de l'API SidiWeb Auth.
+
+    Sections principales :
+    - App Settings : nom de l'application, environnement (dev, prod, etc.)
+    - Database Settings : URI MongoDB et nom de la base de données
+    - Security/JWT Settings : clé secrète, algorithme JWT, durée de validité du token
+    - Service Settings : port FastAPI, URL API externe IA, dossier d'upload
+
+    Les valeurs peuvent être surchargées via un fichier `.env`.
+    """
     # App Settings 
     app_name: str = "SidiWeb Auth API"
     environment: str = "development"  
