@@ -1,18 +1,130 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from src.auth.router import router as auth_router
+from routers.register import router as register_router
+from routers.login import router as login_router
+from routers.me import router as me_router
+from fastapi.middleware.cors import CORSMiddleware
+from core.config import settings
+from datetime import datetime,timezone, timedelta
+import logging
 
-app = FastAPI(
-    title="SidiWeb Backend - Auth Module (B1)",
-    description="Authentication & User Management API",
-    version="0.1.0",
-    docs_url="/docs",
-    redoc_url="/redoc"
-)
-
-app.include_router(auth_router)
-
-@app.get("/")
-async def root():
-    return {"message": "SidiWeb Auth API - B1"}
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    logger.info(f"Starting SidiWeb Auth API in {settings.environment} environment")
+    
+    # Initialize application state
+    app.state.startup_time = datetime.now(timezone.utc)
+    # app.state.version = "0.1.0"
+    app.state.environment = settings.environment
+    
+    try:
+        # Database connection is lazy, but we can ping to verify
+        from database.connection import ping_db
+        if await ping_db():
+            logger.info("Database connection verified")
+        else:
+            logger.warning("Database connection check failed")
+        
+        yield 
+        
+    finally:
+        # Shutdown
+        logger.info("Shutting down SidiWeb Auth API")
+        
+        try:
+            from database.connection import close_db
+            await close_db()
+            logger.info("Database connections closed")
+        except Exception as e:
+            logger.error(f" Error closing database: {e}")
+        
+        logger.info("Shutdown complete")
+
+
+def create_application() -> FastAPI:
+    app = FastAPI(
+        title="SidiWeb Backend - Auth Module",
+        description="Authentication & User Management API",
+        version="0.1.0",
+        lifespan=lifespan,  
+        docs_url="/docs" if settings.environment != "production" else None,
+        redoc_url="/redoc" if settings.environment != "production" else None,
+        openapi_url="/openapi.json" if settings.environment != "production" else None,
+    )
+    
+    # Configure CORS
+    configure_cors(app)
+    
+    # Register routers
+    register_routers(app)
+    
+    return app
+
+
+def configure_cors(app: FastAPI) -> None:
+    origins = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ]
+    
+    if settings.environment == "production":
+        origins = [
+            "https://SidiWeb.com",
+            "https://www.SidiWeb.com",
+        ]
+    
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["Authorization", "Content-Type"],
+    )
+
+
+def register_routers(app: FastAPI) -> None:
+    app.include_router(register_router)
+    app.include_router(login_router)
+    app.include_router(me_router)
+
+
+# Create application
+app = create_application()
+
+
+@app.get("/", tags=["Root"])
+async def read_root() -> dict:
+    return {
+        "message": "Welcome to SidiWeb Authentication API",
+        "version": app.state.version if hasattr(app.state, 'version') else "0.1.0",
+        "environment": app.state.environment if hasattr(app.state, 'environment') else settings.environment,
+        "status": "running",
+        "docs": "/docs" if settings.environment != "production" else None,
+    }
+
+
+@app.get("/health", tags=["Health"])
+async def health_check() -> dict:
+    from database.connection import ping_db
+    
+    try:
+        db_healthy = await ping_db()
+        
+        return {
+            "status": "healthy" if db_healthy else "degraded",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "database": "connected" if db_healthy else "disconnected",
+            "uptime": str(datetime.now(timezone.utc) - app.state.startup_time) if hasattr(app.state, 'startup_time') else "unknown",
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "error": str(e),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
