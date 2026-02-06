@@ -10,9 +10,9 @@ class MongoDBManager:
     
     @classmethod
     def get_client(cls) -> AsyncIOMotorClient:
-        # Get or create MongoDB client with connection pooling
-        # Returns: AsyncIOMotorClient instance
-        # Note: Uses lazy initialization; connection is only established on first use
+        """ Get or create MongoDB client with connection pooling
+         Returns: AsyncIOMotorClient instance
+        Note: Uses lazy initialization; connection is only established on first use"""
         
         if cls._client is None:
             cls._client = AsyncIOMotorClient(
