@@ -12,11 +12,17 @@ class sitesection(BaseModel):
 class sitecontent(BaseModel):
     section : sitesection
 
-
-
-class site ( BaseModel):
+class siteInDB(BaseModel):
     id : str
-    owner_id :str
+    user_id : userInDB.id
+    template_id: str
+    name : str
+    content : sitecontent
+    created_at : datetime
+    updated_at: Optional[datetime]=None
+
+class siteOut ( BaseModel):
+    id : str
     template_id: str
     name : str
     content : sitecontent
