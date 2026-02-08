@@ -22,5 +22,8 @@ class template(BaseModel):
     category : str
     structure : templatestructure 
 
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> ca00c05bf33733b41c7d48109e3946c3171e79b6
