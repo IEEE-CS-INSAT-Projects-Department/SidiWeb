@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from core.config import settings
-from src.auth.crud import get_user_by_email
+from src.auth.crud import get_user_by_email_as_userindb
 from schemas.user import UserInDB
 
 # OAuth2 scheme for token extraction
@@ -24,7 +24,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> UserInDB:
         
         if email is None:
             raise credentials_exception
-        user = await get_user_by_email(email)
+        user = await get_user_by_email_as_userindb(email)
         
         if user is None:
             raise credentials_exception

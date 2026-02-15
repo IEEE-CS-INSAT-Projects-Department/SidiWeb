@@ -3,10 +3,16 @@ from fastapi import FastAPI
 from routers.register import router as register_router
 from routers.login import router as login_router
 from routers.me import router as me_router
+from routers.media import router as media_router
+
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import settings
 from datetime import datetime,timezone, timedelta
 import logging
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -92,6 +98,8 @@ def register_routers(app: FastAPI) -> None:
     app.include_router(register_router)
     app.include_router(login_router)
     app.include_router(me_router)
+    app.include_router(media_router)
+
 
 
 # Create application
@@ -128,3 +136,26 @@ async def health_check() -> dict:
             "error": str(e),
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
+        
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "detail": exc.detail,
+            "status_code": exc.status_code,
+            "path": request.url.path
+        }
+    )
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "detail": exc.errors(),
+            "body": exc.body,
+            "path": request.url.path
+        }
+    )

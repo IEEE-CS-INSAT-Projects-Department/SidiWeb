@@ -1,11 +1,35 @@
+# schemas/user.py - VERSION COMPLÈTEMENT CORRIGÉE
 from datetime import datetime, timezone
 from typing import Optional
-from pydantic import BaseModel, EmailStr, Field, ConfigDict
+from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
 
-#Schema for user creation/registration
+# Schema for user creation/registration
 class UserCreate(BaseModel):
     email: EmailStr
-    password: str = Field(...)
+    password: str = Field(..., min_length=1, max_length=128)  # CRITIQUE: min_length=1
+    
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v: str):
+        # Cette validation ne s'exécutera PAS pour les chaînes vides
+        # car min_length=1 empêche déjà les chaînes vides
+        
+        # Vérifier si c'est seulement des espaces
+        if v.isspace():
+            raise ValueError('Password cannot be only whitespace')
+        
+        # Vérifier la longueur (déjà fait par Field, mais double vérification)
+        if len(v) < 8:
+            raise ValueError('Password must be at least 8 characters')
+        
+        if len(v) > 128:
+            raise ValueError('Password cannot exceed 128 characters')
+        
+        # Vérifier si c'est seulement numérique
+        if v.isnumeric():
+            raise ValueError('Password cannot be only numeric')
+        
+        return v
 
 # Schema for user output/response
 class UserOut(BaseModel):
@@ -16,7 +40,7 @@ class UserOut(BaseModel):
 # Schema for user login (input from client)
 class UserLogin(BaseModel):
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=1)  # CRITIQUE: min_length=1
 
 class UserInDB(BaseModel):
     id: str  
@@ -30,8 +54,8 @@ class UserInDB(BaseModel):
     
     # Pydantic v2 config
     model_config = ConfigDict(
-        from_attributes=True,  # Previously 'orm_mode'
-        protected_namespaces=()  # Avoid conflicts with Python keywords
+        from_attributes=True,
+        protected_namespaces=()
     )
     
     # Create UserInDB from MongoDB document

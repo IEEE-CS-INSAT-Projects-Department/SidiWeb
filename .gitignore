@@ -71,5 +71,5 @@ cython_debug/
 # venv
 .venv/
 
-
-
+#Uploaded files
+src/media/uploads/*
