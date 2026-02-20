@@ -14,7 +14,7 @@ class sitecontent(BaseModel):
 
 class siteInDB(BaseModel):
     id : str
-    user_id : userInDB.id
+    user_id : str 
     template_id: str
     name : str
     content : sitecontent
