@@ -1,4 +1,4 @@
-import '../../index.css'
+import '../../styles-tailwind.css'
 
 const variantStyles = {
   search: 'bg-light-white2 text-light-black placeholder-light-white4 border border-light-white3 focus:outline-none focus:ring-2 focus:ring-light-red1',

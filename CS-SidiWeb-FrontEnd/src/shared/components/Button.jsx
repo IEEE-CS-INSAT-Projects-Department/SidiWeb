@@ -17,8 +17,8 @@ const radiusStyles = {
 }
 
 const dimensionStyles = {
-  login: 'w-[60px] h-[60px]',
-  signup: 'w-[60px] h-[60px]',
+  login: 'w-24 h-12',
+  signup: 'w-24 h-12',
   submit: 'w-[600px] h-[100px]',
   demo: 'w-[120px] h-[90px]',
   board: 'w-[120px] h-[90px]',

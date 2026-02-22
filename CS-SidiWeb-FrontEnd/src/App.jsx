@@ -1,17 +1,17 @@
-import './App.css'
-import { Button } from './shared/components/Button'
-import { Input } from './shared/components/Input'
+import './styles-tailwind.css'
 import Card from './shared/components/Card'
+import LoadingSpinner from './shared/components/LoadingSpinner'
+import { Alert } from './shared/components/Alert'
+import { Toast } from './shared/components/Toast'
+import ResponsiveGrid from './shared/layout/ResponsiveGrid'
+import HomePage from './modules/home/pages/HomePage'
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 min-h-screen">
-      <Button variant="submit" dimension="submit" radius="submit">Click me</Button>
-      <Input variant="input_auth_large" placeholder="Enter your email"></Input>
-      <Card variant="dark_step" title="Step 1: Sign Up" description="Create your account to get started" number="1" icon={<span>🚀</span>} />
-      <Card variant="dark_image" title="Beautiful Scenery" description="Experience the beauty of nature with us" imageSrc="https://source.unsplash.com/random/400x300" />
-      <Card variant="light_image" title="Light Card" description="This is a light themed card with an image." imageSrc="https://source.unsplash.com/random/400x300?light" />
+    <div className="App">
+      <HomePage />
     </div>
+    
   )
 } 
 

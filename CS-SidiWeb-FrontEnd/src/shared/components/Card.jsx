@@ -1,4 +1,4 @@
-import '../../index.css'
+import '../../styles-tailwind.css'
 
 const variantStyles = {
   dark_step: 'bg-vitrine-black2 text-vitrine-white1 border border-vitrine-grey3',
