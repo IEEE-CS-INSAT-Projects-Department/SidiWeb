@@ -1,0 +1,12 @@
+{
+  "id": "startup_tech",
+  "name": "Startup Tech",
+  "description": "Template dynamique pour startups innovantes.",
+  "category": "startup",
+  "structure": {
+    "pages": ["Accueil", "Produit", "Équipe", "Contact"],
+    "layout": "startup",
+    "colors": { "primary": "#0f2027", "secondary": "#2c5364" },
+    "features": ["demo_produit", "call_to_action"]
+  }
+}

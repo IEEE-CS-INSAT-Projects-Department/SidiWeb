@@ -1,0 +1,20 @@
+{
+  "id": "entreprise_classique",
+  "name": "Template Entreprise Classique",
+  "description": "Un template professionnel adapté aux entreprises de services avec pages standard.",
+  "category": "entreprise",
+  "structure": {
+    "pages": ["accueil", "service", "a propos", "contact"],
+    "layout": "corporate",
+    "colors": {
+      "primary": "#003366",
+      "secondary": "#0099cc"
+    },
+    "features": [
+      "formulaire_contact",
+      "carrousel_images",
+      "intégration_google_maps",
+      "section_témoignages"
+    ]
+  }
+}

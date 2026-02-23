@@ -1,0 +1,42 @@
+# Template: CV en Ligne
+
+**ID:** cv_en_ligne
+**Catégorie:** CV
+**Layout:** Vertical professionnel
+
+## Description
+Template pour créer un CV web professionnel et interactif. Permet de présenter son parcours professionnel de manière moderne avec possibilité de téléchargement PDF.
+
+## Pages incluses
+- Profil personnel
+- Expérience professionnelle
+- Compétences et expertise
+- Page de contact
+
+## Fonctionnalités
+- Téléchargement du CV en PDF
+- Présentation des compétences
+- Timeline des expériences
+- Informations de contact
+
+## Style visuel
+Design minimaliste et professionnel avec des couleurs grises sobres. Layout vertical optimisé pour la lecture du parcours professionnel.
+
+## Couleurs
+- Couleur primaire: Gris ardoise (#37474f) - sobriété et professionnalisme
+- Couleur secondaire: Gris clair (#90a4ae) - élégance et modernité
+- Palette complète: Nuances de gris professionnels
+
+## Typographie recommandée
+- Titres: Raleway (élégant et condensé)
+- Corps de texte: Source Sans Pro (lisible et pro)
+
+## Cas d'usage idéaux
+- Recherche d'emploi
+- Portfolio professionnel
+- Présence en ligne
+- Networking professionnel
+- Personal branding
+
+## Mots-clés
+CV, curriculum vitae, professionnel, parcours, expérience, compétences, emploi, carrière, portfolio

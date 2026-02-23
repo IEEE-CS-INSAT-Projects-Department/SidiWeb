@@ -1,0 +1,41 @@
+# Template: Site Vitrine
+
+**ID:** site_vitrine
+**Catégorie:** Vitrine
+**Layout:** Simple
+
+## Description
+Template minimaliste pour une présence en ligne basique. Parfait pour les petites entreprises ou les particuliers qui souhaitent une vitrine web simple et efficace.
+
+## Pages incluses
+- Page d'accueil
+- Page à propos
+- Page de contact
+
+## Fonctionnalités
+- Présentation de l'activité
+- Formulaire de contact
+- Design épuré et simple
+- Navigation intuitive
+
+## Style visuel
+Design minimaliste et épuré qui met l'accent sur le contenu. Utilise des couleurs naturelles et vertes pour un aspect frais et accueillant.
+
+## Couleurs
+- Couleur primaire: Vert foncé (#1b5e20) - nature et confiance
+- Couleur secondaire: Vert clair (#81c784) - fraîcheur et harmonie
+- Palette complète: Nuances de vert naturel
+
+## Typographie recommandée
+- Titres: Montserrat (élégant et moderne)
+- Corps de texte: Lato (lisible et léger)
+
+## Cas d'usage idéaux
+- Petites entreprises locales
+- Artisans débutants
+- Particuliers
+- Associations simples
+- Présence web basique
+
+## Mots-clés
+vitrine, simple, minimal, basique, présentation, contact, épuré, petit, local, débutant

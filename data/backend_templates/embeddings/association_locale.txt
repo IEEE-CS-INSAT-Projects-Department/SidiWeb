@@ -1,0 +1,42 @@
+# Template: Association Locale
+
+**ID:** association_locale
+**Catégorie:** Association
+**Layout:** Simple et accessible
+
+## Description
+Template conçu pour les associations et ONG. Design accessible et chaleureux qui facilite la communication de la mission et permet de collecter des dons.
+
+## Pages incluses
+- Page d'accueil
+- Mission et valeurs
+- Événements associatifs
+- Page de contact
+
+## Fonctionnalités
+- Système de dons en ligne
+- Section actualités
+- Calendrier d'événements
+- Présentation de la mission
+
+## Style visuel
+Design simple et chaleureux avec des couleurs vertes qui évoquent la solidarité et l'engagement. Mise en page accessible et facile à naviguer.
+
+## Couleurs
+- Couleur primaire: Vert forêt (#2e7d32) - solidarité et nature
+- Couleur secondaire: Vert pastel (#c8e6c9) - douceur et espoir
+- Palette complète: Nuances de vert naturel
+
+## Typographie recommandée
+- Titres: Montserrat (accessible et moderne)
+- Corps de texte: Lato (lisible et chaleureux)
+
+## Cas d'usage idéaux
+- Associations locales
+- ONG et organisations humanitaires
+- Groupes communautaires
+- Initiatives solidaires
+- Projets sociaux
+
+## Mots-clés
+association, ONG, solidarité, dons, mission, humanitaire, communauté, social, engagement, bénévolat
