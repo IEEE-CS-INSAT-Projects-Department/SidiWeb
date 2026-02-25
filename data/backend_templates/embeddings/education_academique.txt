@@ -1,0 +1,42 @@
+# Template: Éducation Académique
+
+**ID:** education_academique
+**Catégorie:** Éducation
+**Layout:** Académique structuré
+
+## Description
+Template conçu pour les institutions éducatives et plateformes de formation. Structure claire et organisée parfaite pour présenter des cours et programmes éducatifs.
+
+## Pages incluses
+- Page d'accueil
+- Catalogue de cours
+- Page des formateurs
+- Page de contact
+
+## Fonctionnalités
+- Liste des cours
+- Système d'inscription
+- Profils des formateurs
+- Présentation des programmes
+
+## Style visuel
+Design académique avec des couleurs bleues qui évoquent le sérieux et la structure. Mise en page claire qui facilite la navigation dans le contenu éducatif.
+
+## Couleurs
+- Couleur primaire: Bleu indigo (#1a237e) - académique et sérieux
+- Couleur secondaire: Bleu lavande (#7986cb) - douceur et accessibilité
+- Palette complète: Nuances de bleu académique
+
+## Typographie recommandée
+- Titres: Merriweather (serif académique)
+- Corps de texte: Open Sans (lisible pour le contenu)
+
+## Cas d'usage idéaux
+- Écoles et universités
+- Plateformes e-learning
+- Centres de formation
+- Organismes éducatifs
+- Cours en ligne
+
+## Mots-clés
+éducation, formation, cours, apprentissage, école, université, e-learning, académique, enseignement
