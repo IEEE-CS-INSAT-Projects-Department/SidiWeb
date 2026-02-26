@@ -4,6 +4,7 @@ from routers.register import router as register_router
 from routers.login import router as login_router
 from routers.me import router as me_router
 from routers.media import router as media_router
+from routers.recommendations import router as recommendations_router
 
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import settings
@@ -99,6 +100,7 @@ def register_routers(app: FastAPI) -> None:
     app.include_router(login_router)
     app.include_router(me_router)
     app.include_router(media_router)
+    app.include_router(recommendations_router)
 
 
 

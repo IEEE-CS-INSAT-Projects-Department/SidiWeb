@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from fastapi import FastAPI
+from starlette.middleware.wsgi import WSGIMiddleware
 from dotenv import load_dotenv
 
 workspace_root = Path(__file__).parent.parent
@@ -186,3 +188,10 @@ if __name__ == "__main__":
         port=5001,
         debug=True
     )
+
+
+# Export ASGI app for uvicorn while preserving Flask local run above.
+# This keeps `uvicorn app:app --port 5001 --reload` working.
+flask_app = app
+app = FastAPI()
+app.mount("/", WSGIMiddleware(flask_app))
