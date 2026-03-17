@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sidi Web AI - The future of AI-driven web development">
+    <title>Sidi Web AI - Home</title>
+    <link rel="stylesheet" href="src/shared/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .auth-info {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        #user-name {
+            color: #8b1a1a;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" width="60" height="50" viewBox="0 0 60 50">
+                    <text x="5" y="40" font-size="38" fill="white" font-family="serif" font-weight="bold"
+                        direction="rtl">واب</text>
+                    <circle cx="42" cy="8" r="10" fill="#8b1a1a" />
+                    <text x="35" y="13" font-size="10" fill="white" font-family="serif">سيدي</text>
+                </svg>
+            </a>
+            <div class="menu">
+                <a href="#">How it Works</a>
+                <a href="#">Features</a>
+                <a href="#">Showcase</a>
+            </div>
+            <div id="nav-auth">
+                <a href="src/modules/auth/login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="hero">
+            <h1>Create with Intelligence</h1>
+            <p>The ultimate platform for AI-powered web development. Build, deploy, and scale with Sidi Web AI.</p>
+
+            <div id="guest-cta" class="cta-group">
+                <a href="src/modules/auth/signup.html" class="button" style="text-decoration: none;">Get Started</a>
+                <a href="src/modules/auth/login.html" class="button secondary" style="text-decoration: none;">Sign
+                    In</a>
+            </div>
+
+            <div id="user-cta" class="auth-info">
+                <p>Welcome back, <span id="user-display-name">User</span>!</p>
+                <div class="cta-group" style="margin-top: 15px;">
+                    <p style="color: #a1a1aa; font-size: 0.9rem;">Module M1 Complete: You are logged in.</p>
+                    <button id="logout-btn" class="button secondary">Logout</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bottom">
+        <div class="bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Help Center</a>
+        </div>
+        <p class="copyright">&copy; 2026 Sidi Web AI. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { UserContext } from './src/context/userContext.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navAuth = document.getElementById('nav-auth');
+            const guestCta = document.getElementById('guest-cta');
+            const userCta = document.getElementById('user-cta');
+            const userDisplayName = document.getElementById('user-display-name');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            if (UserContext.isAuthenticated()) {
+                const user = UserContext.getUser();
+                navAuth.innerHTML = `<button id="nav-logout" class="login-btn" style="background:none; border:none; cursor:pointer;">Logout</button>`;
+                guestCta.style.display = 'none';
+                userCta.style.display = 'block';
+                userDisplayName.textContent = user.name || user.email;
+
+                const doLogout = () => {
+                    UserContext.logout();
+                    window.location.reload();
+                };
+
+                logoutBtn.addEventListener('click', doLogout);
+                document.getElementById('nav-logout').addEventListener('click', doLogout);
+            } else {
+                navAuth.innerHTML = `<a href="src/modules/auth/login.html" class="login-btn">Login</a>`;
+                guestCta.style.display = 'flex';
+                userCta.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
