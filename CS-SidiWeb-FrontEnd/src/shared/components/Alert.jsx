@@ -41,12 +41,22 @@ const statusIcons = {
 	error: '✕',
 }
 
+const statusTitles = {
+	info: 'Information',
+	success: 'Success',
+	warning: 'Warning',
+	error: 'Error',
+}
+
 export const Alert = ({
 	theme = 'light',
 	status = 'info',
-	title = 'Information',
+	title,
 	message = '',
+	description,
 	icon,
+	actions,
+	children,
 	className = '',
 	...rest
 }) => {
@@ -54,11 +64,15 @@ export const Alert = ({
 	const normalizedStatus = typeof status === 'string' ? status.toLowerCase() : 'info'
 	const selectedStatus = statusStyles[normalizedStatus] || statusStyles.info
 	const selectedIcon = icon || statusIcons[normalizedStatus] || statusIcons.info
+	const resolvedTitle = title || statusTitles[normalizedStatus] || statusTitles.info
+	const resolvedMessage = message || description
+	const semanticRole = normalizedStatus === 'error' || normalizedStatus === 'warning' ? 'alert' : 'status'
 
 	return (
 		<article
 			className={`w-full border rounded-[12px] border-l-4 p-4 ${selectedTheme.container} ${selectedStatus.accent} ${className}`}
-			role="alert"
+			role={semanticRole}
+			aria-live={semanticRole === 'alert' ? 'assertive' : 'polite'}
 			{...rest}
 		>
 			<div className="flex items-start gap-3">
@@ -68,9 +82,11 @@ export const Alert = ({
 				>
 					{selectedIcon}
 				</span>
-				<div className="min-w-0">
-					<h4 className={`text-sm font-semibold ${selectedTheme.title}`}>{title}</h4>
-					{message ? <p className={`mt-1 text-sm ${selectedTheme.text}`}>{message}</p> : null}
+				<div className="min-w-0 flex-1">
+					<h4 className={`text-sm font-semibold ${selectedTheme.title}`}>{resolvedTitle}</h4>
+					{resolvedMessage ? <p className={`mt-1 text-sm ${selectedTheme.text}`}>{resolvedMessage}</p> : null}
+					{children ? <div className="mt-2">{children}</div> : null}
+					{actions ? <div className="mt-3 flex flex-wrap gap-2">{actions}</div> : null}
 				</div>
 			</div>
 		</article>

@@ -43,14 +43,23 @@ const statusIcons = {
 	error: '✕',
 }
 
+const statusTitles = {
+	info: 'Information',
+	success: 'Success',
+	warning: 'Warning',
+	error: 'Error',
+}
+
 export const Toast = ({
 	theme = 'dark',
 	status = 'info',
-	title = 'Notification',
+	title,
 	message = '',
+	description,
 	icon,
 	showClose = true,
 	onClose,
+	children,
 	className = '',
 	...rest
 }) => {
@@ -58,12 +67,16 @@ export const Toast = ({
 	const normalizedStatus = typeof status === 'string' ? status.toLowerCase() : 'info'
 	const selectedStatus = statusStyles[normalizedStatus] || statusStyles.info
 	const selectedIcon = icon || statusIcons[normalizedStatus] || statusIcons.info
+	const resolvedTitle = title || statusTitles[normalizedStatus] || statusTitles.info
+	const resolvedMessage = message || description
+	const semanticRole = normalizedStatus === 'error' ? 'alert' : 'status'
+	const canClose = showClose && typeof onClose === 'function'
 
 	return (
 		<article
-			className={`w-full max-w-105 border border-l-4 rounded-[12px] px-4 py-3 shadow-sm ${selectedTheme.container} ${selectedStatus.accent} ${className}`}
-			role="status"
-			aria-live="polite"
+			className={`w-full max-w-md border border-l-4 rounded-[12px] px-4 py-3 shadow-sm ${selectedTheme.container} ${selectedStatus.accent} ${className}`}
+			role={semanticRole}
+			aria-live={semanticRole === 'alert' ? 'assertive' : 'polite'}
 			{...rest}
 		>
 			<div className="flex items-start gap-3">
@@ -75,16 +88,17 @@ export const Toast = ({
 				</span>
 
 				<div className="min-w-0 flex-1">
-					<h4 className={`text-sm font-semibold ${selectedTheme.title}`}>{title}</h4>
-					{message ? <p className={`mt-1 text-sm ${selectedTheme.text}`}>{message}</p> : null}
+					<h4 className={`text-sm font-semibold ${selectedTheme.title}`}>{resolvedTitle}</h4>
+					{resolvedMessage ? <p className={`mt-1 text-sm ${selectedTheme.text}`}>{resolvedMessage}</p> : null}
+					{children ? <div className="mt-2">{children}</div> : null}
 				</div>
 
-				{showClose ? (
+				{canClose ? (
 					<button
 						type="button"
 						onClick={onClose}
 						className={`text-base leading-none transition duration-200 cursor-pointer ${selectedTheme.button}`}
-						aria-label="Fermer la notification"
+						aria-label="Close notification"
 					>
 						×
 					</button>

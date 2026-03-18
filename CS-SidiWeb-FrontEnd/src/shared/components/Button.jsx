@@ -1,41 +1,79 @@
 import '../../styles-tailwind.css'
 
 const variantStyles = {
-  login: 'border-2 border-light-red1 text-light-red1 font-semibold text-base hover:bg-light-red1/10',
-  signup: 'bg-light-red1 text-light-white1 font-semibold text-base hover:bg-light-red2',
-  demo: 'bg-vitrine-grey2 text-vitrine-white1 font-medium text-sm hover:bg-vitrine-grey3',
-  submit: 'bg-dark-red1 text-dark-white1 font-semibold text-lg hover:bg-dark-red2',
-  board: 'bg-light-red1 text-light-white1 font-medium text-sm hover:bg-light-red2',
+  primary: 'bg-light-red1 text-light-white1 font-semibold hover:bg-light-red2',
+  outline: 'border border-light-red1 text-light-red1 font-semibold hover:bg-light-red1/10',
+  social: 'border border-light-white3 bg-light-white1 text-light-black font-medium hover:bg-light-white2',
+  ghost: 'text-light-black hover:bg-light-white2',
+  login: 'border-2 border-light-red1 text-light-red1 font-semibold hover:bg-light-red1/10',
+  signup: 'bg-light-red1 text-light-white1 font-semibold hover:bg-light-red2',
+  demo: 'bg-vitrine-grey2 text-vitrine-white1 font-medium hover:bg-vitrine-grey3',
+  submit: 'bg-dark-red1 text-dark-white1 font-semibold hover:bg-dark-red2',
+  board: 'bg-light-red1 text-light-white1 font-medium hover:bg-light-red2',
+  authPrimary: 'bg-light-red1 text-light-white1 font-semibold hover:bg-light-red2',
+  authOutline: 'border border-light-red1 text-light-red1 font-semibold hover:bg-light-red1/10',
 }
 
-const radiusStyles = {
-  login: 'rounded-[20px]',
-  signup: 'rounded-[20px]',
-  submit: 'rounded-[15px]',
-  demo: 'rounded-[25px]',
-  board: 'rounded-[25px]',
+const sizeStyles = {
+  xs: 'h-9 px-3 text-xs rounded-lg',
+  sm: 'h-10 px-4 text-sm rounded-xl',
+  md: 'h-11 px-5 text-sm rounded-xl',
+  lg: 'h-12 px-6 text-base rounded-2xl',
+  nav: 'h-12 px-6 text-base rounded-[20px]',
+  auth: 'h-12 px-4 text-[0.95rem] rounded-[12px]',
 }
 
-const dimensionStyles = {
-  login: 'w-24 h-12',
-  signup: 'w-24 h-12',
-  submit: 'w-[600px] h-[100px]',
-  demo: 'w-[120px] h-[90px]',
-  board: 'w-[120px] h-[90px]',
+const defaultSizeByVariant = {
+  primary: 'md',
+  outline: 'md',
+  social: 'auth',
+  ghost: 'md',
+  login: 'nav',
+  signup: 'nav',
+  demo: 'md',
+  submit: 'auth',
+  board: 'md',
+  authPrimary: 'auth',
+  authOutline: 'auth',
 }
 
-export const Button = ({ variant, size, children, ...rest }) => {
-  const variantClass = variantStyles[variant] || '';
-  const dimensionClass = dimensionStyles[variant] || '';
-  const sizeClass = dimensionClass ? '' : (dimensionStyles[size] || '');
-  const radiusClass = radiusStyles[variant] || 'border-radius-[15px]';
-    return (
+export const Button = ({
+  variant = 'primary',
+  size,
+  fullWidth = false,
+  isLoading = false,
+  leftIcon,
+  rightIcon,
+  className = '',
+  type = 'button',
+  disabled = false,
+  children,
+  ...rest
+}) => {
+  const variantClass = variantStyles[variant] || variantStyles.primary
+  const resolvedSize = size || defaultSizeByVariant[variant] || 'md'
+  const sizeClass = sizeStyles[resolvedSize] || sizeStyles.md
+  const widthClass = fullWidth ? 'w-full' : 'w-fit'
+
+  return (
     <button
-        className={`${variantClass} ${dimensionClass} ${sizeClass} ${radiusClass} cursor-pointer
-        transition duration-300 ease-in-out`}
-        {...rest}
+      type={type}
+      className={`${variantClass} ${sizeClass} ${widthClass} inline-flex items-center justify-center gap-2 whitespace-nowrap transition duration-300 ease-in-out disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.99] ${className}`}
+      disabled={isLoading || disabled}
+      {...rest}
     >
-        {children}
-    </button>  );
-}   
+      {isLoading ? (
+        <span
+          className="w-4 h-4 rounded-full border-2 border-current border-r-transparent animate-spin"
+          aria-hidden="true"
+        />
+      ) : null}
+      {leftIcon && !isLoading ? <span aria-hidden="true">{leftIcon}</span> : null}
+      <span>{children}</span>
+      {rightIcon ? <span aria-hidden="true">{rightIcon}</span> : null}
+    </button>
+  )
+}
+
+export default Button
 
