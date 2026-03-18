@@ -10,7 +10,7 @@ import capabilityThree from '../../../assets/image3.png'
 
 function HomePage() {
 	return (
-		<main className="relative min-h-screen overflow-x-hidden bg-vitrine-black1 text-vitrine-white1">
+		<main className="relative min-h-screen w-full overflow-x-hidden bg-vitrine-black1 text-vitrine-white1">
 			<div className="pointer-events-none absolute inset-0">
 				<div className="absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-dark-red1/30 blur-[110px]" />
 				<div className="absolute top-96 -right-30 h-72 w-72 rounded-full bg-vitrine-red1/20 blur-[120px]" />
@@ -36,16 +36,16 @@ function HomePage() {
 			</header>
 
 			<section className="relative mx-auto w-full max-w-7xl px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14">
-				<div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
-					<div className="max-w-xl">
-						<h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+				<div className="grid w-full grid-cols-1 items-center justify-items-stretch gap-10 lg:grid-cols-2">
+					<div className="w-full min-w-0 max-w-2xl justify-self-stretch lg:max-w-none">
+						<h1 className="w-full text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
 							Sidi Web builds
 							<br />
 							websites in
 							<span className="text-light-red3"> seconds.</span>
 						</h1>
 
-						<p className="mt-5 max-w-md text-sm leading-6 text-vitrine-grey1 sm:text-base">
+						<p className="mt-5 text-sm leading-6 text-vitrine-grey1 sm:text-base">
 							One click with AI intelligence assistance and industry-proven workflows.
 							Create websites faster than your competition.
 						</p>
@@ -62,7 +62,7 @@ function HomePage() {
 						</div>
 					</div>
 
-					<div className="relative flex justify-center lg:justify-end">
+					<div className="relative flex w-full justify-center justify-self-stretch lg:justify-end">
 						<div className="absolute bottom-8 left-1/2 h-44 w-44 -translate-x-1/2 rounded-full bg-dark-red1/35 blur-[70px]" />
 						<img
 							src={heroRobot}
@@ -75,11 +75,11 @@ function HomePage() {
 
 			<section id="features" className="border-t border-vitrine-grey3/70">
 				<div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14">
-					<div className="mx-auto mb-9 max-w-2xl text-center">
-						<h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+					<div className="mx-auto mb-9 w-full min-w-0 max-w-2xl justify-self-stretch text-center">
+						<h2 className="w-full text-3xl font-semibold tracking-tight sm:text-4xl">
 							From chat to <span className="text-light-red3">reality</span>
 						</h2>
-						<p className="mt-3 text-sm text-vitrine-grey1">
+						<p className="mt-3 w-full text-sm text-vitrine-grey1">
 							Build your project in guided steps and launch faster with a clean pipeline.
 						</p>
 					</div>
@@ -148,11 +148,11 @@ function HomePage() {
 
 			<section className="border-t border-vitrine-grey3/70">
 				<div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-					<div className="relative overflow-hidden rounded-3xl border border-vitrine-grey3 bg-vitrine-black2 px-6 py-14 text-center sm:px-10">
+					<div className="relative w-full overflow-hidden rounded-3xl border border-vitrine-grey3 bg-vitrine-black2 px-6 py-14 text-center sm:px-10">
 						<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(179,19,26,0.42),transparent_64%)]" />
-						<div className="relative">
-							<h3 className="text-3xl font-bold leading-tight sm:text-4xl">Ready to build the future?</h3>
-							<p className="mx-auto mt-3 max-w-lg text-sm text-vitrine-grey1">
+						<div className="relative mx-auto w-full min-w-0 max-w-2xl justify-self-stretch">
+							<h3 className="w-full text-3xl font-bold leading-tight sm:text-4xl">Ready to build the future?</h3>
+							<p className="mt-3 w-full text-sm text-vitrine-grey1">
 								Design, deploy, iterate and grow with Sidi AI.
 							</p>
 							<div className="mt-7 flex items-center justify-center">
@@ -164,7 +164,7 @@ function HomePage() {
 			</section>
 
 			<footer id="footer" className="border-t border-vitrine-grey3/70">
-				<div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+				<div className="mx-auto grid w-full justify-content max-w-7xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
 					<div>
 						<img src={logo} alt="Sidi Web" className="h-8 w-auto object-contain" />
 						<p className="mt-4 max-w-sm text-xs leading-5 text-vitrine-grey1">

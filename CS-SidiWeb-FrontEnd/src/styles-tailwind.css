@@ -36,13 +36,13 @@
 	--radius-md: 0.5rem;
 	--radius-lg: 0.75rem;
 
-	/* Spacing */
-	--spacing-xs: 0.25rem;
-	--spacing-sm: 0.5rem;
-	--spacing-md: 1rem;
-	--spacing-lg: 1.5rem;
-	--spacing-xl: 2rem;
-	--spacing-2xl: 3rem;
+	/* Custom app spacing tokens (avoid Tailwind token name collisions) */
+	--app-spacing-xs: 0.25rem;
+	--app-spacing-sm: 0.5rem;
+	--app-spacing-md: 1rem;
+	--app-spacing-lg: 1.5rem;
+	--app-spacing-xl: 2rem;
+	--app-spacing-2xl: 3rem;
 
 	/* Font Weight */
 	--font-weight-normal: 400;

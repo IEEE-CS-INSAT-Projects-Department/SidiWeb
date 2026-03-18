@@ -8,7 +8,7 @@ import HomePage from './modules/home/pages/HomePage'
 
 function App() {
   return (
-    <div className="App">
+    <div className="w-full min-w-0 overflow-x-hidden">
       <HomePage />
     </div>
     
