@@ -29,7 +29,9 @@ function HomePage() {
 					</nav>
 
 					<div className="flex items-center gap-2 sm:gap-3">
-						<Button variant="login" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Log in</Button>
+						<a href="/dashboard">
+							<Button variant="login" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Log in</Button>
+						</a>
 						<Button variant="signup" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Sign up</Button>
 					</div>
 				</div>
@@ -51,7 +53,9 @@ function HomePage() {
 						</p>
 
 						<div className="mt-7 flex items-center gap-3">
-							<Button variant="signup" size="sm" className="h-10! px-6!">Start</Button>
+							<a href="/dashboard">
+								<Button variant="signup" size="sm" className="h-10! px-6!">Start</Button>
+							</a>
 							<Button
 								variant="demo"
 								size="sm"
