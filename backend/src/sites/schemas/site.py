@@ -5,12 +5,14 @@ from datetime import datetime
 
 class SiteCreate(BaseModel):
     name: str
+    description: Optional[str] = None
     template_id: Optional[str] = None
     content: Optional[Dict[str, Any]] = None
 
 
 class SiteUpdate(BaseModel):
     name: Optional[str] = None
+    description: Optional[str] = None
     template_id: Optional[str] = None
     content: Optional[Dict[str, Any]] = None
     published: Optional[bool] = None
@@ -19,6 +21,7 @@ class SiteUpdate(BaseModel):
 class SiteOut(BaseModel):
     id: str
     name: str
+    description: Optional[str] = None
     template_id: Optional[str] = None
     content: Optional[Dict[str, Any]] = None
     published: bool = False
