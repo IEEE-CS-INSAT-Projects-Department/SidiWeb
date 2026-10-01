@@ -87,24 +87,26 @@ def create_application() -> FastAPI:
 
 
 def configure_cors(app: FastAPI) -> None:
-    origins = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-    ]
-    
+    methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    headers = ["Authorization", "Content-Type"]
+
     if settings.environment == "production":
-        origins = [
-            "https://SidiWeb.com",
-            "https://www.SidiWeb.com",
-        ]
-    
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allow_headers=["Authorization", "Content-Type"],
-    )
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["https://SidiWeb.com", "https://www.SidiWeb.com"],
+            allow_credentials=True,
+            allow_methods=methods,
+            allow_headers=headers,
+        )
+    else:
+        # Development: accept localhost / 127.0.0.1 / [::1] on any port
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origin_regex=r"https?://(localhost|127\.0\.0\.1|\[::1\])(:\d+)?",
+            allow_credentials=True,
+            allow_methods=methods,
+            allow_headers=headers,
+        )
 
 
 def register_routers(app: FastAPI) -> None:
