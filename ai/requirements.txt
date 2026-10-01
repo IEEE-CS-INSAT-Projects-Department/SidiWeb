@@ -1,24 +1,17 @@
-# SidiWeb AI - LangChain Requirements
-# Week 2 Implementation Dependencies
+# SidiWeb AI — Gemini-based recommendation service (LangChain)
+# The chain uses Google Gemini (ChatGoogleGenerativeAI); OpenAI is left commented
+# out in the code. These versions are a self-consistent set (the old 0.1.0 pins
+# were incompatible with the code, which targets the LangChain 1.x API).
 
-# Core LangChain
-langchain==0.1.0
-langchain-openai==0.0.5
-langchain-core==0.1.10
+langchain-core==1.2.15
+langchain-google-genai==4.2.1
 
-# OpenAI
-openai==1.10.0
+# Output validation
+pydantic>=2.7
+
+# Config
+python-dotenv==1.0.0
 
 # Web API (Flask server exposed on port 5001)
 flask==3.0.3
 flask-cors==4.0.1
-
-# Pydantic for output parsing
-pydantic==2.5.3
-
-# Environment management
-python-dotenv==1.0.0
-
-# Optional: for development
-black==24.1.1
-pytest==7.4.4
