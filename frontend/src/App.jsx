@@ -30,14 +30,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/dashboard/templates"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/dashboard/templates" element={<Navigate to="/templates" replace />} />
           <Route
             path="/templates"
             element={
