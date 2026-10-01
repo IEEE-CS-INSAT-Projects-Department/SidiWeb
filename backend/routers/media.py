@@ -22,31 +22,30 @@ async def upload_file(file: UploadFile,current_user: UserInDB = Depends(get_curr
     else:
        
         try:
-            mime= await validate_image(file)
+            mime = await validate_image(file)
             contents = file.file.read()
-            media = await create_media(file.filename,current_user.id)
-            print(media.path)
+            media = await create_media(file.filename, current_user.id)
+            os.makedirs(os.path.dirname(media.path), exist_ok=True)
             with open(media.path, 'wb') as f:
                 f.write(contents)
-
+        except HTTPException:
+            raise  # let validation / client errors (e.g. invalid file type) through
         except Exception:
             raise HTTPException(status_code=500, detail="Something went wrong")
         finally:
             file.file.close()
-        return {"message":f"Successfully uploaded {file.filename}"}
+        return {"message": f"Successfully uploaded {file.filename}"}
 
 
 
 
-uter = APIRouter()
-
-@router.get("/api/media")
+@router.get("")
 async def get_user_media(current_user : UserInDB = Depends(get_current_user)):
 
     return await get_media_list(current_user)
 
 
-@router.get("/api/media/{media_id}")
+@router.get("/{media_id}")
 async def get_media_file(media_id: str, current_user : UserInDB =Depends(get_current_user)):
     media = await get_media_by_id(media_id)
 
@@ -61,13 +60,17 @@ async def get_media_file(media_id: str, current_user : UserInDB =Depends(get_cur
 
     return FileResponse(file_path)
 
-@router.delete("/api/media/{media_id}")
+@router.delete("/{media_id}")
 async def delete_media(
     media_id: str,
     current_user=Depends(get_current_user)
 ):
     db = get_db()
-    media = await db.media.find_one({"_id": ObjectId(media_id)})
+    try:
+        oid = ObjectId(media_id)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Media not found")
+    media = await db.media.find_one({"_id": oid})
 
     if not media:
         raise HTTPException(status_code=404, detail="Media not found")
@@ -89,6 +92,6 @@ async def delete_media(
         os.remove(file_path)
 
     # Delete from DB
-    await db.media.delete_one({"_id": ObjectId(media_id)})
+    await db.media.delete_one({"_id": oid})
 
     return {"message": "Media deleted successfully"}

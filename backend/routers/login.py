@@ -30,15 +30,13 @@ async def login(user_data: UserCreate) -> dict:
     
     Returns access token with expiration time.
     """
-    # Vérifier si l'utilisateur existe
+    # Vérifier les identifiants — message générique pour éviter l'énumération d'emails
     db_user = await get_user_by_email(user_data.email)
-    
-    if not db_user:
-        raise InvalidEmailException()
-    
-    # Vérifier le mot de passe
-    if not verify_password(user_data.password, db_user.get("hashed_password", "")):
-        raise InvalidPasswordException()
+
+    if not db_user or not verify_password(
+        user_data.password, db_user.get("hashed_password", "")
+    ):
+        raise InvalidCredentialsException()
     
     # Vérifier si l'utilisateur est actif
     if not db_user.get("is_active", True):

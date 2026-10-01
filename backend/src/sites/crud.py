@@ -1,9 +1,18 @@
 import json
 from pathlib import Path
 from bson import ObjectId
+from bson.errors import InvalidId
 from datetime import datetime
 
 _TEMPLATES_DIR = Path(__file__).resolve().parent / "data"
+
+
+def _to_object_id(site_id: str):
+    """Return an ObjectId or None if the string is not a valid id."""
+    try:
+        return ObjectId(site_id)
+    except (InvalidId, TypeError):
+        return None
 
 
 async def create_site(db, site_data: dict, user_id: str):
@@ -27,22 +36,31 @@ async def get_user_sites(db, user_id: str):
 
 
 async def get_site_by_id(db, site_id: str):
-    site = await db.sites.find_one({"_id": ObjectId(site_id)})
+    oid = _to_object_id(site_id)
+    if oid is None:
+        return None
+    site = await db.sites.find_one({"_id": oid})
     if site:
         site["id"] = str(site["_id"])
     return site
 
 
 async def update_site(db, site_id: str, update_data: dict):
+    oid = _to_object_id(site_id)
+    if oid is None:
+        return None
     await db.sites.update_one(
-        {"_id": ObjectId(site_id)},
+        {"_id": oid},
         {"$set": update_data}
     )
     return await get_site_by_id(db, site_id)
 
 
 async def delete_site(db, site_id: str):
-    await db.sites.delete_one({"_id": ObjectId(site_id)})
+    oid = _to_object_id(site_id)
+    if oid is None:
+        return
+    await db.sites.delete_one({"_id": oid})
 
 
 # --- Templates (read-only, seeded from bundled JSON files) ---
