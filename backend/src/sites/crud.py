@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from uuid import uuid4
 from bson import ObjectId
 from bson.errors import InvalidId
 from datetime import datetime
@@ -15,11 +16,44 @@ def _to_object_id(site_id: str):
         return None
 
 
+def _block(block_type: str, data: dict) -> dict:
+    return {"id": str(uuid4()), "type": block_type, "data": data}
+
+
+def blocks_from_template(template: dict) -> list:
+    """Build editable starter blocks from a template's structure."""
+    structure = template.get("structure") or {}
+    pages = structure.get("pages") or []
+    features = structure.get("features") or []
+
+    blocks = [_block("heading", {"text": template.get("name", "Mon site")})]
+    if template.get("description"):
+        blocks.append(_block("paragraph", {"text": template["description"]}))
+
+    for page in pages:
+        if str(page).strip().lower() in ("contact",):
+            continue
+        blocks.append(_block("heading", {"text": str(page)}))
+        blocks.append(_block("paragraph", {"text": f"Contenu de la section « {page} »…"}))
+
+    wants_contact = any("contact" in str(x).lower() for x in list(pages) + list(features))
+    if wants_contact:
+        blocks.append(_block("contact", {"title": "Contactez-nous"}))
+
+    return blocks
+
+
 async def create_site(db, site_data: dict, user_id: str):
     site_data["owner_id"] = user_id
     site_data["published"] = False
     site_data["public_url"] = None
     site_data["created_at"] = datetime.utcnow()
+
+    # Seed editable content from the chosen template when none was provided
+    if not site_data.get("content") and site_data.get("template_id"):
+        template = await get_template_by_id(db, site_data["template_id"])
+        if template:
+            site_data["content"] = {"blocks": blocks_from_template(template)}
 
     result = await db.sites.insert_one(site_data)
     site_data["id"] = str(result.inserted_id)
