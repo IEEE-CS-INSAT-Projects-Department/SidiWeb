@@ -1,0 +1,43 @@
+# Template: Entreprise Classique
+
+**ID:** entreprise_classique
+**Catégorie:** Entreprise
+**Layout:** Corporate professionnel
+
+## Description
+Template corporate classique pour entreprises établies. Design professionnel et sérieux qui inspire confiance avec toutes les fonctionnalités attendues d'un site d'entreprise.
+
+## Pages incluses
+- Page d'accueil
+- Page des services
+- À propos
+- Page de contact
+
+## Fonctionnalités
+- Formulaire de contact professionnel
+- Carrousel d'images
+- Intégration Google Maps
+- Section témoignages clients
+- Présentation de l'entreprise
+
+## Style visuel
+Design corporate traditionnel avec des couleurs bleues professionnelles. Mise en page structurée et sérieuse qui inspire la confiance des clients B2B.
+
+## Couleurs
+- Couleur primaire: Bleu marine (#003366) - confiance et tradition
+- Couleur secondaire: Bleu ciel (#0099cc) - professionnalisme et clarté
+- Palette complète: Nuances de bleu corporate
+
+## Typographie recommandée
+- Titres: Source Sans Pro (corporate et sérieux)
+- Corps de texte: Roboto (professionnel et lisible)
+
+## Cas d'usage idéaux
+- Entreprises établies
+- Sociétés B2B
+- Cabinets professionnels
+- Entreprises de services
+- Organisations traditionnelles
+
+## Mots-clés
+entreprise, corporate, professionnel, B2B, sérieux, confiance, établi, traditionnel, services

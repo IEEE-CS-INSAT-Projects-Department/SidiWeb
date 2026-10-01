@@ -1,0 +1,39 @@
+# Template: Landing Page
+
+**ID:** landing_page
+**Catégorie:** Landing
+**Layout:** Landing page conversion
+
+## Description
+Template optimisé pour la conversion, conçu pour présenter un produit ou service unique avec un fort impact visuel. Idéal pour les campagnes marketing et le lead generation.
+
+## Pages incluses
+- Page unique (one-page)
+
+## Fonctionnalités
+- Call-to-action stratégiques
+- Formulaire d'inscription newsletter
+- Design orienté conversion
+- Structure marketing optimisée
+
+## Style visuel
+Design vibrant et impactant avec des couleurs violet et bleu qui attirent l'attention. Mise en page optimisée pour guider le visiteur vers l'action.
+
+## Couleurs
+- Couleur primaire: Violet intense (#6a11cb) - créativité et premium
+- Couleur secondaire: Bleu électrique (#2575fc) - énergie et action
+- Palette complète: Dégradés violet-bleu vibrants
+
+## Typographie recommandée
+- Titres: Space Grotesk (impactant et moderne)
+- Corps de texte: Work Sans (clair et lisible)
+
+## Cas d'usage idéaux
+- Lancement de produit
+- Campagnes marketing
+- Lead generation
+- Promotions
+- Événements ponctuels
+
+## Mots-clés
+landing, conversion, marketing, campagne, lead, promotion, CTA, newsletter, one-page, lancement

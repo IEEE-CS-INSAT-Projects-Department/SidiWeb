@@ -1,0 +1,42 @@
+# Template: Freelance Pro
+
+**ID:** freelance_pro
+**Catégorie:** Freelance
+**Layout:** Moderne professionnel
+
+## Description
+Template spécialement conçu pour les freelances et consultants indépendants. Combine professionnalisme et modernité pour mettre en valeur les services et le portfolio.
+
+## Pages incluses
+- Page d'accueil
+- Page des services
+- Portfolio
+- Page de contact
+
+## Fonctionnalités
+- Grille tarifaire
+- Formulaire de contact personnalisé
+- Galerie portfolio
+- Présentation des compétences
+
+## Style visuel
+Design moderne avec des couleurs sombres et des accents turquoise. Crée un équilibre entre professionnalisme et créativité, idéal pour les freelances.
+
+## Couleurs
+- Couleur primaire: Gris anthracite (#222831) - élégance et modernité
+- Couleur secondaire: Turquoise (#00adb5) - créativité et énergie
+- Palette complète: Sombre avec accents colorés
+
+## Typographie recommandée
+- Titres: Poppins (moderne et lisible)
+- Corps de texte: Inter (professionnel et clair)
+
+## Cas d'usage idéaux
+- Freelances créatifs
+- Consultants indépendants
+- Designers freelance
+- Développeurs indépendants
+- Professionnels autonomes
+
+## Mots-clés
+freelance, indépendant, consultant, portfolio, services, moderne, créatif, professionnel, autonome

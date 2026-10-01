@@ -1,0 +1,12 @@
+{
+  "id": "portfolio_personnel",
+  "name": "Portfolio Personnel",
+  "description": "Template pour présenter projets et compétences.",
+  "category": "portfolio",
+  "structure": {
+    "pages": ["Accueil", "Projets", "Compétences", "Contact"],
+    "layout": "minimal",
+    "colors": { "primary": "#4a90e2", "secondary": "#f5a623" },
+    "features": ["galerie_projets", "liens_reseaux"]
+  }
+}

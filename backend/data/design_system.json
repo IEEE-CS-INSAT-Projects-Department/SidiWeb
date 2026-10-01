@@ -1,0 +1,324 @@
+{
+  "templates": [
+    {
+      "id": "service_professionnel",
+      "name": "Service Professionnel",
+      "category": "service",
+      "description": "Template pour présenter des services professionnels avec tarification",
+      "layout": "pro",
+      "pages": ["Accueil", "Services", "Tarifs", "Contact"],
+      "features": ["pricing", "contact_rapide"],
+      "colors": {
+        "primary": "#455a64",
+        "secondary": "#ffca28"
+      },
+      "style_tags": ["professionnel", "moderne", "service"]
+    },
+    {
+      "id": "site_vitrine",
+      "name": "Site Vitrine",
+      "category": "vitrine",
+      "description": "Template simple pour présence en ligne basique",
+      "layout": "simple",
+      "pages": ["Accueil", "À propos", "Contact"],
+      "features": ["presentation", "contact"],
+      "colors": {
+        "primary": "#1b5e20",
+        "secondary": "#81c784"
+      },
+      "style_tags": ["simple", "minimal", "basique"]
+    },
+    {
+      "id": "startup_tech",
+      "name": "Startup Tech",
+      "category": "startup",
+      "description": "Template dynamique pour startups innovantes et technologiques",
+      "layout": "startup",
+      "pages": ["Accueil", "Produit", "Équipe", "Contact"],
+      "features": ["demo_produit", "call_to_action"],
+      "colors": {
+        "primary": "#0f2027",
+        "secondary": "#2c5364"
+      },
+      "style_tags": ["moderne", "dynamique", "tech", "innovant"]
+    },
+    {
+      "id": "landing_page",
+      "name": "Landing Page",
+      "category": "landing",
+      "description": "Template pour présenter un produit ou service avec forte conversion",
+      "layout": "landing",
+      "pages": ["Accueil"],
+      "features": ["call_to_action", "newsletter"],
+      "colors": {
+        "primary": "#6a11cb",
+        "secondary": "#2575fc"
+      },
+      "style_tags": ["moderne", "conversion", "marketing"]
+    },
+    {
+      "id": "freelance_pro",
+      "name": "Freelance Pro",
+      "category": "freelance",
+      "description": "Template pour freelances et consultants indépendants",
+      "layout": "moderne",
+      "pages": ["Accueil", "Services", "Portfolio", "Contact"],
+      "features": ["pricing", "formulaire_contact"],
+      "colors": {
+        "primary": "#222831",
+        "secondary": "#00adb5"
+      },
+      "style_tags": ["moderne", "professionnel", "portfolio"]
+    },
+    {
+      "id": "evenement_moderne",
+      "name": "Événement Moderne",
+      "category": "evenement",
+      "description": "Template pour promouvoir un événement avec inscriptions",
+      "layout": "moderne",
+      "pages": ["Accueil", "À propos", "Programme", "Intervenants", "Inscription", "Contact"],
+      "features": ["formulaire_contact", "formulaire_inscription", "compte_rebours"],
+      "colors": {
+        "primary": "#e94e77",
+        "secondary": "#393e46"
+      },
+      "style_tags": ["moderne", "vibrant", "dynamique", "evenement"]
+    },
+    {
+      "id": "entreprise_classique",
+      "name": "Entreprise Classique",
+      "category": "entreprise",
+      "description": "Template professionnel pour entreprises de services établies",
+      "layout": "corporate",
+      "pages": ["Accueil", "Services", "À propos", "Contact"],
+      "features": ["formulaire_contact", "carrousel_images", "intégration_google_maps", "section_témoignages"],
+      "colors": {
+        "primary": "#003366",
+        "secondary": "#0099cc"
+      },
+      "style_tags": ["corporate", "classique", "professionnel", "sérieux"]
+    },
+    {
+      "id": "education_academique",
+      "name": "Éducation Académique",
+      "category": "education",
+      "description": "Template pour écoles et plateformes éducatives",
+      "layout": "academique",
+      "pages": ["Accueil", "Cours", "Formateurs", "Contact"],
+      "features": ["liste_cours", "inscription"],
+      "colors": {
+        "primary": "#1a237e",
+        "secondary": "#7986cb"
+      },
+      "style_tags": ["academique", "professionnel", "education", "structure"]
+    },
+    {
+      "id": "cv_en_ligne",
+      "name": "CV en Ligne",
+      "category": "cv",
+      "description": "Template pour créer un CV web professionnel téléchargeable",
+      "layout": "vertical",
+      "pages": ["Profil", "Expérience", "Compétences", "Contact"],
+      "features": ["telechargement_cv"],
+      "colors": {
+        "primary": "#37474f",
+        "secondary": "#90a4ae"
+      },
+      "style_tags": ["minimal", "professionnel", "vertical", "cv"]
+    },
+    {
+      "id": "association_locale",
+      "name": "Association Locale",
+      "category": "association",
+      "description": "Template pour associations et ONG avec système de dons",
+      "layout": "simple",
+      "pages": ["Accueil", "Mission", "Événements", "Contact"],
+      "features": ["dons", "actualites"],
+      "colors": {
+        "primary": "#2e7d32",
+        "secondary": "#c8e6c9"
+      },
+      "style_tags": ["simple", "chaleureux", "solidaire", "accessible"]
+    },
+    {
+      "id": "artisan_local",
+      "name": "Artisan Local",
+      "category": "artisan",
+      "description": "Template simple pour artisans et métiers manuels",
+      "layout": "classique",
+      "pages": ["Accueil", "Services", "Réalisations", "Contact"],
+      "features": ["galerie_photos", "formulaire_contact"],
+      "colors": {
+        "primary": "#a0522d",
+        "secondary": "#deb887"
+      },
+      "style_tags": ["classique", "chaleureux", "authentique", "traditionnel"]
+    }
+  ],
+
+  "color_palettes": [
+    {
+      "id": "palette_service_pro",
+      "name": "Service Professionnel",
+      "category": "service",
+      "colors": ["#455a64", "#ffca28", "#607d8b", "#ffd54f", "#ffffff"],
+      "description": "Palette neutre professionnelle avec accent jaune pour services"
+    },
+    {
+      "id": "palette_vitrine_nature",
+      "name": "Vitrine Nature",
+      "category": "vitrine",
+      "colors": ["#1b5e20", "#81c784", "#2e7d32", "#a5d6a7", "#ffffff"],
+      "description": "Palette verte naturelle pour sites vitrines écologiques"
+    },
+    {
+      "id": "palette_startup_dark",
+      "name": "Startup Dark Tech",
+      "category": "startup",
+      "colors": ["#0f2027", "#2c5364", "#203a43", "#0f2027", "#ffffff"],
+      "description": "Palette sombre moderne pour startups tech innovantes"
+    },
+    {
+      "id": "palette_landing_vibrant",
+      "name": "Landing Vibrant",
+      "category": "landing",
+      "colors": ["#6a11cb", "#2575fc", "#8e2de2", "#4a90e2", "#ffffff"],
+      "description": "Palette violet-bleu vibrante pour landing pages impactantes"
+    },
+    {
+      "id": "palette_freelance_modern",
+      "name": "Freelance Moderne",
+      "category": "freelance",
+      "colors": ["#222831", "#00adb5", "#393e46", "#00d9ff", "#eeeeee"],
+      "description": "Palette sombre turquoise pour freelances modernes"
+    },
+    {
+      "id": "palette_evenement_energie",
+      "name": "Événement Énergie",
+      "category": "evenement",
+      "colors": ["#e94e77", "#393e46", "#d63447", "#222831", "#ffffff"],
+      "description": "Palette rose énergique pour événements dynamiques"
+    },
+    {
+      "id": "palette_corporate_bleu",
+      "name": "Corporate Bleu",
+      "category": "entreprise",
+      "colors": ["#003366", "#0099cc", "#004d99", "#33ccff", "#ffffff"],
+      "description": "Palette bleue corporate classique pour entreprises"
+    },
+    {
+      "id": "palette_education_academique",
+      "name": "Éducation Académique",
+      "category": "education",
+      "colors": ["#1a237e", "#7986cb", "#283593", "#9fa8da", "#ffffff"],
+      "description": "Palette bleue académique pour institutions éducatives"
+    },
+    {
+      "id": "palette_cv_professionnel",
+      "name": "CV Professionnel",
+      "category": "cv",
+      "colors": ["#37474f", "#90a4ae", "#546e7a", "#b0bec5", "#ffffff"],
+      "description": "Palette grise sobre pour CV professionnels"
+    },
+    {
+      "id": "palette_association_solidaire",
+      "name": "Association Solidaire",
+      "category": "association",
+      "colors": ["#2e7d32", "#c8e6c9", "#388e3c", "#a5d6a7", "#ffffff"],
+      "description": "Palette verte solidaire pour associations et ONG"
+    },
+    {
+      "id": "palette_artisan_terre",
+      "name": "Artisan Terre",
+      "category": "artisan",
+      "colors": ["#a0522d", "#deb887", "#8b4513", "#f5deb3", "#ffffff"],
+      "description": "Palette marron terre pour artisans et métiers traditionnels"
+    }
+  ],
+
+  "font_pairings": [
+    {
+      "id": "fonts_moderne_sans",
+      "name": "Moderne Sans-Serif",
+      "heading": "Poppins",
+      "body": "Inter",
+      "layout": "moderne",
+      "categories": ["startup", "freelance", "evenement", "landing"],
+      "description": "Police sans-serif moderne et dynamique"
+    },
+    {
+      "id": "fonts_pro_clean",
+      "name": "Professionnel Clean",
+      "heading": "Roboto",
+      "body": "Open Sans",
+      "layout": "pro",
+      "categories": ["service", "entreprise", "education"],
+      "description": "Police professionnelle claire et lisible"
+    },
+    {
+      "id": "fonts_minimal_light",
+      "name": "Minimal Light",
+      "heading": "Montserrat",
+      "body": "Lato",
+      "layout": "simple",
+      "categories": ["vitrine", "association", "cv"],
+      "description": "Police épurée et minimaliste"
+    },
+    {
+      "id": "fonts_corporate_serious",
+      "name": "Corporate Sérieux",
+      "heading": "Source Sans Pro",
+      "body": "Roboto",
+      "layout": "corporate",
+      "categories": ["entreprise", "education"],
+      "description": "Police corporate traditionnelle et sérieuse"
+    },
+    {
+      "id": "fonts_classique_serif",
+      "name": "Classique Serif",
+      "heading": "Playfair Display",
+      "body": "Lora",
+      "layout": "classique",
+      "categories": ["artisan", "association"],
+      "description": "Police serif classique et élégante"
+    },
+    {
+      "id": "fonts_vertical_condensed",
+      "name": "Vertical Condensé",
+      "heading": "Raleway",
+      "body": "Source Sans Pro",
+      "layout": "vertical",
+      "categories": ["cv"],
+      "description": "Police condensée pour layouts verticaux"
+    },
+    {
+      "id": "fonts_academique_structure",
+      "name": "Académique Structuré",
+      "heading": "Merriweather",
+      "body": "Open Sans",
+      "layout": "academique",
+      "categories": ["education"],
+      "description": "Police structurée pour contenu académique"
+    },
+    {
+      "id": "fonts_landing_impact",
+      "name": "Landing Impact",
+      "heading": "Space Grotesk",
+      "body": "Work Sans",
+      "layout": "landing",
+      "categories": ["landing", "startup"],
+      "description": "Police impactante pour landing pages"
+    }
+  ],
+
+  "style_mappings": {
+    "moderne": ["startup", "freelance", "evenement", "landing"],
+    "professionnel": ["service", "entreprise", "education", "freelance", "cv"],
+    "simple": ["vitrine", "association"],
+    "classique": ["artisan", "entreprise", "association"],
+    "minimal": ["cv", "vitrine"],
+    "dynamique": ["startup", "evenement", "landing"],
+    "corporate": ["entreprise"],
+    "academique": ["education"]
+  }
+}

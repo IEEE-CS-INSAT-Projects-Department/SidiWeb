@@ -1,0 +1,12 @@
+{
+  "id": "service_professionnel",
+  "name": "Service Professionnel",
+  "description": "Template pour présenter des services.",
+  "category": "service",
+  "structure": {
+    "pages": ["Accueil", "Services", "Tarifs", "Contact"],
+    "layout": "pro",
+    "colors": { "primary": "#455a64", "secondary": "#ffca28" },
+    "features": ["pricing", "contact_rapide"]
+  }
+}

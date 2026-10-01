@@ -1,0 +1,12 @@
+{
+  "id": "association_locale",
+  "name": "Association Locale",
+  "description": "Template pour associations et ONG.",
+  "category": "association",
+  "structure": {
+    "pages": ["Accueil", "Mission", "Événements", "Contact"],
+    "layout": "simple",
+    "colors": { "primary": "#2e7d32", "secondary": "#c8e6c9" },
+    "features": ["dons", "actualites"]
+  }
+}

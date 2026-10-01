@@ -1,0 +1,20 @@
+{
+  "id": "evenement_moderne",
+  "name": "Evenement_moderne",
+  "description": "Un template pour promouvoir un événement",
+  "category": "evenement",
+  "structure": {
+    "pages": ["Accueil", "À propos", "programme","intervenants","inscription","contact"],
+    "layout": "moderne",
+    "colors": {
+      "primary": "#e94e77",
+      "secondary": "#393e46"
+    },
+    "features": [
+      "formulaire_contact",
+      "formulaire_inscription",
+      "compte_rebours"
+    ]
+  }
+}
+

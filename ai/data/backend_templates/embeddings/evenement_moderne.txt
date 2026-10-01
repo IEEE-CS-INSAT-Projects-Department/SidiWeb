@@ -1,0 +1,45 @@
+# Template: Événement Moderne
+
+**ID:** evenement_moderne
+**Catégorie:** Événement
+**Layout:** Moderne dynamique
+
+## Description
+Template énergique conçu pour promouvoir des événements. Comprend toutes les fonctionnalités nécessaires pour gérer les inscriptions et présenter le programme de manière attrayante.
+
+## Pages incluses
+- Page d'accueil
+- À propos de l'événement
+- Programme détaillé
+- Page des intervenants
+- Formulaire d'inscription
+- Page de contact
+
+## Fonctionnalités
+- Formulaire d'inscription événement
+- Formulaire de contact
+- Compte à rebours
+- Présentation des intervenants
+- Programme détaillé
+
+## Style visuel
+Design vibrant et dynamique avec une couleur rose énergique qui attire l'attention. Parfait pour créer l'excitation autour d'un événement.
+
+## Couleurs
+- Couleur primaire: Rose énergique (#e94e77) - dynamisme et passion
+- Couleur secondaire: Gris foncé (#393e46) - contraste et professionnalisme
+- Palette complète: Rose vif avec contrastes sombres
+
+## Typographie recommandée
+- Titres: Poppins (moderne et impactant)
+- Corps de texte: Inter (lisible et professionnel)
+
+## Cas d'usage idéaux
+- Conférences
+- Séminaires
+- Festivals
+- Événements d'entreprise
+- Ateliers et formations
+
+## Mots-clés
+événement, conférence, inscription, programme, intervenants, séminaire, festival, atelier, formation
