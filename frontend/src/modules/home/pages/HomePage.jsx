@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../../../styles-tailwind.css'
 import { Button } from '../../../shared/components/Button'
 import Card from '../../../shared/components/Card'
@@ -29,10 +30,12 @@ function HomePage() {
 					</nav>
 
 					<div className="flex items-center gap-2 sm:gap-3">
-						<a href="/dashboard">
+						<Link to="/login">
 							<Button variant="login" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Log in</Button>
-						</a>
-						<Button variant="signup" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Sign up</Button>
+						</Link>
+						<Link to="/register">
+							<Button variant="signup" size="sm" className="h-9! px-4! text-xs! sm:h-10! sm:px-5!">Sign up</Button>
+						</Link>
 					</div>
 				</div>
 			</header>
@@ -53,9 +56,9 @@ function HomePage() {
 						</p>
 
 						<div className="mt-7 flex items-center gap-3">
-							<a href="/dashboard">
+							<Link to="/register">
 								<Button variant="signup" size="sm" className="h-10! px-6!">Start</Button>
-							</a>
+							</Link>
 							<Button
 								variant="demo"
 								size="sm"

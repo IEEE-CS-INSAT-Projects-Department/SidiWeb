@@ -1,14 +1,24 @@
+import { getToken, clearToken } from '../../auth/services/authService'
+
 const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 const SITES_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/sites` : '/sites'
 
 async function request(url, options = {}) {
+	const token = getToken()
 	const response = await fetch(url, {
 		headers: {
 			'Content-Type': 'application/json',
+			...(token ? { Authorization: `Bearer ${token}` } : {}),
 			...(options.headers || {})
 		},
 		...options
 	})
+
+	if (response.status === 401) {
+		clearToken()
+		if (typeof window !== 'undefined') window.location.assign('/login')
+		throw new Error('Session expired. Please log in again.')
+	}
 
 	let payload = null
 	const contentType = response.headers.get('content-type') || ''
