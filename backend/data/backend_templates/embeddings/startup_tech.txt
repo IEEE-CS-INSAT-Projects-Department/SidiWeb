@@ -1,0 +1,42 @@
+# Template: Startup Tech
+
+**ID:** startup_tech
+**Catégorie:** Startup
+**Layout:** Startup dynamique
+
+## Description
+Template moderne et dynamique spécialement conçu pour les startups technologiques innovantes. Met en valeur le produit et l'équipe avec un design audacieux et contemporain.
+
+## Pages incluses
+- Page d'accueil
+- Page produit
+- Page équipe
+- Page de contact
+
+## Fonctionnalités
+- Démo produit interactive
+- Call-to-action puissants
+- Présentation de l'équipe
+- Design tech moderne
+
+## Style visuel
+Design sombre et tech avec des dégradés modernes. Crée une atmosphère innovante et high-tech, parfaite pour les startups dans le domaine technologique.
+
+## Couleurs
+- Couleur primaire: Noir profond (#0f2027) - tech et moderne
+- Couleur secondaire: Gris bleuté (#2c5364) - sophistication
+- Palette complète: Dégradés sombres tech
+
+## Typographie recommandée
+- Titres: Poppins (moderne et géométrique)
+- Corps de texte: Inter (tech et lisible)
+
+## Cas d'usage idéaux
+- Startups technologiques
+- Entreprises SaaS
+- Applications web/mobile
+- Produits innovants
+- Scale-ups tech
+
+## Mots-clés
+startup, tech, innovant, moderne, produit, SaaS, application, technologie, innovation, dynamique

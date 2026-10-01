@@ -1,0 +1,12 @@
+{
+  "id": "site_vitrine",
+  "name": "Site Vitrine",
+  "description": "Template simple pour présence en ligne.",
+  "category": "vitrine",
+  "structure": {
+    "pages": ["Accueil", "À propos", "Contact"],
+    "layout": "simple",
+    "colors": { "primary": "#1b5e20", "secondary": "#81c784" },
+    "features": ["presentation", "contact"]
+  }
+}

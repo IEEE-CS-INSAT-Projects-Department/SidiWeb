@@ -1,0 +1,42 @@
+# Template: Service Professionnel
+
+**ID:** service_professionnel
+**Catégorie:** Service
+**Layout:** Professionnel
+
+## Description
+Template conçu pour présenter des services professionnels de manière claire et structurée. Idéal pour les entreprises de services qui veulent afficher leurs offres avec une tarification transparente.
+
+## Pages incluses
+- Page d'accueil
+- Page des services
+- Page de tarifs
+- Page de contact
+
+## Fonctionnalités
+- Système de tarification (pricing)
+- Formulaire de contact rapide
+- Présentation des services
+- Design professionnel et moderne
+
+## Style visuel
+Le template utilise un design professionnel avec des couleurs neutres et des accents jaunes pour attirer l'attention. Le layout est organisé et facilite la navigation.
+
+## Couleurs
+- Couleur primaire: Gris bleuté (#455a64) - professionnel et neutre
+- Couleur secondaire: Jaune doré (#ffca28) - accent énergique
+- Palette complète: Nuances de gris avec touches de jaune
+
+## Typographie recommandée
+- Titres: Roboto (police professionnelle)
+- Corps de texte: Open Sans (lisible et moderne)
+
+## Cas d'usage idéaux
+- Agences de services
+- Consultants professionnels
+- Entreprises B2B
+- Prestataires de services
+- Cabinets de conseil
+
+## Mots-clés
+service, professionnel, tarification, pricing, contact, moderne, entreprise, B2B, prestataire, conseil

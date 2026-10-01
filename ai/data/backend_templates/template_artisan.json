@@ -1,0 +1,12 @@
+{
+  "id": "artisan_local",
+  "name": "Artisan Local",
+  "description": "Template simple pour artisans et métiers manuels.",
+  "category": "artisan",
+  "structure": {
+    "pages": ["Accueil", "Services", "Réalisations", "Contact"],
+    "layout": "classique",
+    "colors": { "primary": "#a0522d", "secondary": "#deb887" },
+    "features": ["galerie_photos", "formulaire_contact"]
+  }
+}

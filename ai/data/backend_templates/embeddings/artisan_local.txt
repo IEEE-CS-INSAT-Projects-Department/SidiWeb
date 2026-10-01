@@ -1,0 +1,42 @@
+# Template: Artisan Local
+
+**ID:** artisan_local
+**Catégorie:** Artisan
+**Layout:** Classique chaleureux
+
+## Description
+Template simple et authentique pour artisans et métiers manuels. Met en valeur le savoir-faire artisanal avec une galerie de réalisations et un design chaleureux.
+
+## Pages incluses
+- Page d'accueil
+- Services proposés
+- Galerie de réalisations
+- Page de contact
+
+## Fonctionnalités
+- Galerie photos des réalisations
+- Formulaire de contact
+- Présentation des services
+- Portfolio de travaux
+
+## Style visuel
+Design classique et chaleureux avec des couleurs terre et bois. Évoque l'authenticité et le travail manuel de qualité, parfait pour les artisans.
+
+## Couleurs
+- Couleur primaire: Marron terre (#a0522d) - authenticité et tradition
+- Couleur secondaire: Beige sable (#deb887) - chaleur et naturel
+- Palette complète: Tons terre et bois naturels
+
+## Typographie recommandée
+- Titres: Playfair Display (classique et élégant)
+- Corps de texte: Lora (chaleureux et lisible)
+
+## Cas d'usage idéaux
+- Artisans locaux
+- Métiers manuels
+- Artisanat d'art
+- Petits commerces traditionnels
+- Savoir-faire local
+
+## Mots-clés
+artisan, métier, manuel, traditionnel, authentique, savoir-faire, réalisations, local, artisanat

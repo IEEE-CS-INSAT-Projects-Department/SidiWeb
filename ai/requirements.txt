@@ -1,0 +1,17 @@
+# SidiWeb AI — Gemini-based recommendation service (LangChain)
+# The chain uses Google Gemini (ChatGoogleGenerativeAI); OpenAI is left commented
+# out in the code. These versions are a self-consistent set (the old 0.1.0 pins
+# were incompatible with the code, which targets the LangChain 1.x API).
+
+langchain-core==1.2.15
+langchain-google-genai==4.2.1
+
+# Output validation
+pydantic>=2.7
+
+# Config
+python-dotenv==1.0.0
+
+# Web API (Flask server exposed on port 5001)
+flask==3.0.3
+flask-cors==4.0.1

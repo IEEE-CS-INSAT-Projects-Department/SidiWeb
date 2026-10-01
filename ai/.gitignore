@@ -1,0 +1,21 @@
+# Environment variables (keep local, never commit)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LangChain
+.langchain_cache/

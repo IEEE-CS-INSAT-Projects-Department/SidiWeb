@@ -1,0 +1,96 @@
+# Environment variables (keep local, never commit)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LangChain
+.langchain_cache/
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.coverage
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and databases
+logs/
+*.log
+*.db
+dump.rdb
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# FastAPI / Uvicorn
+*.pid
+
+# Testing
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.whl
+
+# Pip
+pip-selfcheck.json
+
+# Celery
+celerybeat-schedule
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Sphinx documentation
+docs/_build/
+# PyInstaller
+*.spec
+# C extensions
+*.c
+*.o
+*.so
+# Cython debug symbols
+cython_debug/
+# venv
+.venv/
+
+#Uploaded files
+src/media/uploads/*
