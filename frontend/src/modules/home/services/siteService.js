@@ -56,9 +56,20 @@ export async function getAllSites() {
 	return getSites()
 }
 
+export async function getSite(siteId) {
+	return request(`${SITES_ENDPOINT}/${siteId}`, { method: 'GET' })
+}
+
 export async function createSite(siteData) {
 	return request(SITES_ENDPOINT, {
 		method: 'POST',
+		body: JSON.stringify(siteData)
+	})
+}
+
+export async function updateSite(siteId, siteData) {
+	return request(`${SITES_ENDPOINT}/${siteId}`, {
+		method: 'PUT',
 		body: JSON.stringify(siteData)
 	})
 }
@@ -71,7 +82,9 @@ export async function deleteSite(siteId) {
 const siteService = {
 	getAllSites,
 	getSites,
+	getSite,
 	createSite,
+	updateSite,
 	deleteSite
 }
 

@@ -4,6 +4,10 @@ import HomePage from './modules/home/pages/HomePage'
 import Dashboard from './modules/home/pages/Dashboard'
 import Login from './modules/auth/pages/Login'
 import Register from './modules/auth/pages/Register'
+import TemplateGallery from './modules/templates/pages/TemplateGallery'
+import Editor from './modules/editor/pages/Editor'
+import Assistant from './modules/assistant/pages/Assistant'
+import MediaLibrary from './modules/media/pages/MediaLibrary'
 import { isAuthenticated } from './modules/auth/services/authService'
 
 function ProtectedRoute({ children }) {
@@ -31,6 +35,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/templates"
+            element={
+              <ProtectedRoute>
+                <TemplateGallery />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/editor/:id"
+            element={
+              <ProtectedRoute>
+                <Editor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assistant"
+            element={
+              <ProtectedRoute>
+                <Assistant />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/media"
+            element={
+              <ProtectedRoute>
+                <MediaLibrary />
               </ProtectedRoute>
             }
           />
