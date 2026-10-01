@@ -5,13 +5,19 @@ from datetime import datetime, timezone
 from core.security import get_password_hash, verify_password
 from typing import Optional, Dict, Any
 
+
+def normalize_email(email: str) -> str:
+    """Emails are case-insensitive; store and look them up in a canonical form."""
+    return (email or "").strip().lower()
+
+
 async def get_user_by_email(email: str) -> Optional[Dict[str, Any]]:
     """
     Get user by email from database.
     Returns raw MongoDB document (dict).
     """
     db =  get_db()
-    user_doc = await db.users.find_one({"email": email})
+    user_doc = await db.users.find_one({"email": normalize_email(email)})
     return user_doc
 
 
@@ -37,7 +43,7 @@ async def create_user(email: str, password: str) -> Dict[str, Any]:
     db =  get_db()
     hashed = get_password_hash(password)
     user_data = {
-        "email": email,
+        "email": normalize_email(email),
         "hashed_password": hashed,
         "created_at": datetime.now(timezone.utc),
         "is_active": True,
