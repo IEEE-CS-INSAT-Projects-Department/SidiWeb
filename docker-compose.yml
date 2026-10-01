@@ -1,0 +1,67 @@
+# SidiWeb — full stack: MongoDB + backend (FastAPI) + AI (Flask) + frontend (nginx)
+# Usage:
+#   cp .env.example .env    # optional: set JWT_SECRET_KEY, OPENAI_API_KEY
+#   docker compose up --build
+
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    # Services reach Mongo over the compose network at mongo:27017 regardless of
+    # the host port. Override MONGO_PORT in .env if 27017 is taken on your host.
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: development
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DB_NAME: sidiweb_db
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-dev-secret-change-me}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: "1440"
+      FASTAPI_PORT: "8000"
+      UPLOAD_DIR: src/media/uploads
+      IA_API_URL: http://ai:5001
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - uploads:/app/src/media/uploads
+
+  ai:
+    build: ./ai
+    restart: unless-stopped
+    environment:
+      # The chain uses Google Gemini; OPENAI_API_KEY is accepted but unused by default
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "5001:5001"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Browser runs on the host, so it reaches the backend via the host port
+        VITE_API_URL: http://localhost:${BACKEND_PORT:-8000}/api
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+
+volumes:
+  mongo-data:
+  uploads:
