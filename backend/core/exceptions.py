@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 
 
 class AuthException(HTTPException):
-    def __init__(self, detail: str = "Erreur d'authentification"):
+    def __init__(self, detail: str = "Authentication error"):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=detail,
@@ -13,14 +13,14 @@ class AuthException(HTTPException):
 
 class InvalidCredentialsException(AuthException):
     def __init__(self):
-        super().__init__(detail="Email ou mot de passe incorrect")
+        super().__init__(detail="Invalid email or password")
 
 
 class InvalidEmailException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Email ou mot de passe incorrect",
+            detail="Invalid email or password",
         )
 
 
@@ -28,7 +28,7 @@ class InvalidPasswordException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Email ou mot de passe incorrect",
+            detail="Invalid email or password",
         )
 
 
@@ -36,7 +36,7 @@ class UserAlreadyExistsException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_409_CONFLICT,
-            detail="Cet email est déjà utilisé",
+            detail="This email is already registered",
         )
 
 
@@ -44,7 +44,7 @@ class WeakPasswordException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Le mot de passe doit contenir au moins 8 caractères",
+            detail="Password must be at least 8 characters",
         )
 
 
@@ -52,7 +52,7 @@ class UserNotFoundException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Utilisateur introuvable",
+            detail="User not found",
         )
 
 
@@ -60,15 +60,15 @@ class InactiveUserException(HTTPException):
     def __init__(self):
         super().__init__(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Ce compte est désactivé",
+            detail="This account is disabled",
         )
 
 
 class TokenExpiredException(AuthException):
     def __init__(self):
-        super().__init__(detail="Votre session a expiré, veuillez vous reconnecter")
+        super().__init__(detail="Your session has expired, please log in again")
 
 
 class TokenInvalidException(AuthException):
     def __init__(self):
-        super().__init__(detail="Session invalide, veuillez vous reconnecter")
+        super().__init__(detail="Invalid session, please log in again")

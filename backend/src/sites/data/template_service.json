@@ -1,12 +1,23 @@
 {
   "id": "service_professionnel",
-  "name": "Service Professionnel",
-  "description": "Template pour présenter des services.",
+  "name": "Professional Service",
+  "description": "Template to present services.",
   "category": "service",
   "structure": {
-    "pages": ["Accueil", "Services", "Tarifs", "Contact"],
+    "pages": [
+      "Home",
+      "Services",
+      "Pricing",
+      "Contact"
+    ],
     "layout": "pro",
-    "colors": { "primary": "#455a64", "secondary": "#ffca28" },
-    "features": ["pricing", "contact_rapide"]
+    "colors": {
+      "primary": "#455a64",
+      "secondary": "#ffca28"
+    },
+    "features": [
+      "pricing",
+      "contact_rapide"
+    ]
   }
 }

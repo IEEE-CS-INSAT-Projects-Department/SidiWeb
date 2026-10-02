@@ -17,6 +17,6 @@ async def get_template(template_id: str, db=Depends(get_db)):
     template = await crud.get_template_by_id(db, template_id)
 
     if not template:
-        raise HTTPException(status_code=404, detail="Modèle introuvable")
+        raise HTTPException(status_code=404, detail="Template not found")
 
     return template

@@ -1,12 +1,20 @@
 {
   "id": "landing_page",
   "name": "Landing Page",
-  "description": "Template pour présenter un produit ou service.",
+  "description": "Template to present a product or service.",
   "category": "landing",
   "structure": {
-    "pages": ["Accueil"],
+    "pages": [
+      "Home"
+    ],
     "layout": "landing",
-    "colors": { "primary": "#6a11cb", "secondary": "#2575fc" },
-    "features": ["call_to_action", "newsletter"]
+    "colors": {
+      "primary": "#6a11cb",
+      "secondary": "#2575fc"
+    },
+    "features": [
+      "call_to_action",
+      "newsletter"
+    ]
   }
 }

@@ -35,10 +35,10 @@ async def get_site(
     site = await crud.get_site_by_id(db, site_id)
 
     if not site:
-        raise HTTPException(status_code=404, detail="Site introuvable")
+        raise HTTPException(status_code=404, detail="Site not found")
 
     if site["owner_id"] != current_user.id:
-        raise HTTPException(status_code=403, detail="Action non autorisée")
+        raise HTTPException(status_code=403, detail="Not authorized")
 
     return site
 
@@ -53,10 +53,10 @@ async def update_site(
     site = await crud.get_site_by_id(db, site_id)
 
     if not site:
-        raise HTTPException(status_code=404, detail="Site introuvable")
+        raise HTTPException(status_code=404, detail="Site not found")
 
     if site["owner_id"] != current_user.id:
-        raise HTTPException(status_code=403, detail="Action non autorisée")
+        raise HTTPException(status_code=403, detail="Not authorized")
 
     update_data = site_update.dict(exclude_unset=True)
 
@@ -75,10 +75,10 @@ async def delete_site(
     site = await crud.get_site_by_id(db, site_id)
 
     if not site:
-        raise HTTPException(status_code=404, detail="Site introuvable")
+        raise HTTPException(status_code=404, detail="Site not found")
 
     if site["owner_id"] != current_user.id:
-        raise HTTPException(status_code=403, detail="Action non autorisée")
+        raise HTTPException(status_code=403, detail="Not authorized")
 
     await crud.delete_site(db, site_id)
 

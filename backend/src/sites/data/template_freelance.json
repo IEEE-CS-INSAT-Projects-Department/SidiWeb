@@ -1,12 +1,23 @@
 {
   "id": "freelance_pro",
   "name": "Freelance Pro",
-  "description": "Template pour freelances et consultants.",
+  "description": "Template for freelancers and consultants.",
   "category": "freelance",
   "structure": {
-    "pages": ["Accueil", "Services", "Portfolio", "Contact"],
+    "pages": [
+      "Home",
+      "Services",
+      "Portfolio",
+      "Contact"
+    ],
     "layout": "moderne",
-    "colors": { "primary": "#222831", "secondary": "#00adb5" },
-    "features": ["pricing", "formulaire_contact"]
+    "colors": {
+      "primary": "#222831",
+      "secondary": "#00adb5"
+    },
+    "features": [
+      "pricing",
+      "formulaire_contact"
+    ]
   }
 }

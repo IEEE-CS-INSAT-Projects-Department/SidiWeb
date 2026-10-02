@@ -26,7 +26,7 @@ def blocks_from_template(template: dict) -> list:
     pages = structure.get("pages") or []
     features = structure.get("features") or []
 
-    blocks = [_block("heading", {"text": template.get("name", "Mon site")})]
+    blocks = [_block("heading", {"text": template.get("name", "My site")})]
     if template.get("description"):
         blocks.append(_block("paragraph", {"text": template["description"]}))
 
@@ -34,11 +34,11 @@ def blocks_from_template(template: dict) -> list:
         if str(page).strip().lower() in ("contact",):
             continue
         blocks.append(_block("heading", {"text": str(page)}))
-        blocks.append(_block("paragraph", {"text": f"Contenu de la section « {page} »…"}))
+        blocks.append(_block("paragraph", {"text": f"Content for the \"{page}\" section…"}))
 
     wants_contact = any("contact" in str(x).lower() for x in list(pages) + list(features))
     if wants_contact:
-        blocks.append(_block("contact", {"title": "Contactez-nous"}))
+        blocks.append(_block("contact", {"title": "Contact us"}))
 
     return blocks
 

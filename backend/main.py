@@ -172,7 +172,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     errors = exc.errors()
     # Surface a single human-readable message (the first validation error)
     first = errors[0] if errors else {}
-    message = first.get("msg") or "Données invalides"
+    message = first.get("msg") or "Invalid input"
     if message.startswith("Value error, "):
         message = message[len("Value error, "):]
     return JSONResponse(
@@ -192,7 +192,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
-            "detail": "Une erreur interne est survenue, veuillez réessayer plus tard",
+            "detail": "An internal error occurred, please try again later",
             "status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
             "path": request.url.path,
         },
