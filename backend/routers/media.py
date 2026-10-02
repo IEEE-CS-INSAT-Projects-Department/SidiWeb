@@ -17,7 +17,7 @@ async def upload_file(file: UploadFile,current_user: UserInDB = Depends(get_curr
     if current_user is None:
          raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="You must be logged in to perform this action"
+            detail="Vous devez être connecté pour effectuer cette action"
         )
     else:
        
@@ -31,10 +31,10 @@ async def upload_file(file: UploadFile,current_user: UserInDB = Depends(get_curr
         except HTTPException:
             raise  # let validation / client errors (e.g. invalid file type) through
         except Exception:
-            raise HTTPException(status_code=500, detail="Something went wrong")
+            raise HTTPException(status_code=500, detail="Le téléversement a échoué, veuillez réessayer")
         finally:
             file.file.close()
-        return {"message": f"Successfully uploaded {file.filename}"}
+        return {"message": f"Image « {file.filename} » téléversée avec succès"}
 
 
 
@@ -50,11 +50,11 @@ async def get_media_file(media_id: str, current_user : UserInDB =Depends(get_cur
     media = await get_media_by_id(media_id)
 
     if not media:
-        raise HTTPException(status_code=404, detail="Not found")
+        raise HTTPException(status_code=404, detail="Média introuvable")
 
     # Ownership check
     if media["user_id"] != current_user.id:
-        raise HTTPException(status_code=403, detail="Forbidden")
+        raise HTTPException(status_code=403, detail="Action non autorisée")
 
     file_path = get_file(media)
 
@@ -69,15 +69,15 @@ async def delete_media(
     try:
         oid = ObjectId(media_id)
     except Exception:
-        raise HTTPException(status_code=404, detail="Media not found")
+        raise HTTPException(status_code=404, detail="Média introuvable")
     media = await db.media.find_one({"_id": oid})
 
     if not media:
-        raise HTTPException(status_code=404, detail="Media not found")
+        raise HTTPException(status_code=404, detail="Média introuvable")
 
     # Ownership check
     if media["user_id"] != current_user.id:
-        raise HTTPException(status_code=403, detail="Forbidden")
+        raise HTTPException(status_code=403, detail="Action non autorisée")
 
     # Build file path
     file_path = os.path.join(

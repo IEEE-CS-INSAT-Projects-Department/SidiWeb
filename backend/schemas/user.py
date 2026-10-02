@@ -16,18 +16,18 @@ class UserCreate(BaseModel):
         
         # Vérifier si c'est seulement des espaces
         if v.isspace():
-            raise ValueError('Password cannot be only whitespace')
+            raise ValueError('Le mot de passe ne peut pas être composé uniquement d\'espaces')
         
         # Vérifier la longueur (déjà fait par Field, mais double vérification)
         if len(v) < 8:
-            raise ValueError('Password must be at least 8 characters')
+            raise ValueError('Le mot de passe doit contenir au moins 8 caractères')
         
         if len(v) > 128:
-            raise ValueError('Password cannot exceed 128 characters')
+            raise ValueError('Le mot de passe ne peut pas dépasser 128 caractères')
         
         # Vérifier si c'est seulement numérique
         if v.isnumeric():
-            raise ValueError('Password cannot be only numeric')
+            raise ValueError('Le mot de passe ne peut pas être uniquement numérique')
         
         return v
 
