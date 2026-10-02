@@ -52,7 +52,7 @@ export default function TemplateGallery() {
 	}
 
 	return (
-		<AppShell title="Templates" subtitle="Choisissez un modèle pour démarrer votre site">
+		<AppShell title="Templates" subtitle="Choose a template to start your site">
 			{error ? (
 				<div className="mb-4">
 					<Alert theme="light" status="error" message={error} />
@@ -60,7 +60,7 @@ export default function TemplateGallery() {
 			) : null}
 
 			{loading ? (
-				<LoadingSpinner theme="light" label="Chargement des templates..." />
+				<LoadingSpinner theme="light" label="Loading templates..." />
 			) : (
 				<>
 					<div className="mb-5 flex flex-wrap gap-2">
@@ -75,7 +75,7 @@ export default function TemplateGallery() {
 										: 'border-light-white3 text-light-white4 hover:text-light-black'
 								}`}
 							>
-								{c === 'all' ? 'Tous' : c}
+								{c === 'all' ? 'All' : c}
 							</button>
 						))}
 					</div>
@@ -93,7 +93,7 @@ export default function TemplateGallery() {
 								<p className="mt-1 flex-1 text-sm text-light-white4">{t.description}</p>
 								{t.structure?.pages ? (
 									<p className="mt-3 text-xs text-light-white4">
-										Pages : {t.structure.pages.join(', ')}
+										Pages: {t.structure.pages.join(', ')}
 									</p>
 								) : null}
 								<Button
@@ -103,14 +103,14 @@ export default function TemplateGallery() {
 									isLoading={creatingId === t.id}
 									onClick={() => useTemplate(t)}
 								>
-									Utiliser ce template
+									Use this template
 								</Button>
 							</article>
 						))}
 					</div>
 
 					{filtered.length === 0 ? (
-						<p className="text-sm text-light-white4">Aucun template dans cette catégorie.</p>
+						<p className="text-sm text-light-white4">No templates in this category.</p>
 					) : null}
 				</>
 			)}

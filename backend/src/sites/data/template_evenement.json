@@ -1,10 +1,17 @@
 {
   "id": "evenement_moderne",
-  "name": "Evenement_moderne",
-  "description": "Un template pour promouvoir un événement",
-  "category": "evenement",
+  "name": "Modern Event",
+  "description": "A template to promote an event",
+  "category": "event",
   "structure": {
-    "pages": ["Accueil", "À propos", "programme","intervenants","inscription","contact"],
+    "pages": [
+      "Home",
+      "About",
+      "Program",
+      "Speakers",
+      "Registration",
+      "Contact"
+    ],
     "layout": "moderne",
     "colors": {
       "primary": "#e94e77",
@@ -17,4 +24,3 @@
     ]
   }
 }
-

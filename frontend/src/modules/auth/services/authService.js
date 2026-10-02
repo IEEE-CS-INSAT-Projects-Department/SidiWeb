@@ -37,15 +37,21 @@ function extractError(payload, status) {
 		if (Array.isArray(payload.detail) && payload.detail[0]?.msg) return payload.detail[0].msg
 		if (payload.message) return payload.message
 	}
+	if (status >= 500) return 'The server encountered an error, please try again later'
 	return `Request failed (${status})`
 }
 
 async function postJson(url, body) {
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(body),
-	})
+	let response
+	try {
+		response = await fetch(url, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body),
+		})
+	} catch {
+		throw new Error('Cannot reach the server. Check your connection and try again.')
+	}
 
 	let payload = null
 	if ((response.headers.get('content-type') || '').includes('application/json')) {

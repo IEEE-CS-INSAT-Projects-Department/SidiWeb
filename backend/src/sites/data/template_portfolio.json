@@ -1,12 +1,23 @@
 {
   "id": "portfolio_personnel",
-  "name": "Portfolio Personnel",
-  "description": "Template pour présenter projets et compétences.",
+  "name": "Personal Portfolio",
+  "description": "Template to showcase projects and skills.",
   "category": "portfolio",
   "structure": {
-    "pages": ["Accueil", "Projets", "Compétences", "Contact"],
+    "pages": [
+      "Home",
+      "Projects",
+      "Skills",
+      "Contact"
+    ],
     "layout": "minimal",
-    "colors": { "primary": "#4a90e2", "secondary": "#f5a623" },
-    "features": ["galerie_projets", "liens_reseaux"]
+    "colors": {
+      "primary": "#4a90e2",
+      "secondary": "#f5a623"
+    },
+    "features": [
+      "galerie_projets",
+      "liens_reseaux"
+    ]
   }
 }

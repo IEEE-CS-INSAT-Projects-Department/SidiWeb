@@ -5,14 +5,17 @@ import AppShell from '../../../shared/layout/AppShell'
 import { Input } from '../../../shared/components/Input'
 import { Button } from '../../../shared/components/Button'
 import { Alert } from '../../../shared/components/Alert'
+import ConfirmDialog from '../../../shared/components/ConfirmDialog'
+import { useToast } from '../../../shared/components/ToastProvider'
 import siteService from '../services/siteService'
 
 const getSiteId = (site, fallback) => site.id ?? site._id ?? site.siteId ?? fallback
-const getSiteName = (site) => site.name || site.title || 'Site sans nom'
-const getSiteDescription = (site) => site.description || 'Aucune description disponible.'
+const getSiteName = (site) => site.name || site.title || 'Untitled site'
+const getSiteDescription = (site) => site.description || 'No description available.'
 
 export default function Dashboard() {
 	const navigate = useNavigate()
+	const toast = useToast()
 	const [sites, setSites] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [searchQuery, setSearchQuery] = useState('')
@@ -21,6 +24,8 @@ export default function Dashboard() {
 	const [newSiteName, setNewSiteName] = useState('')
 	const [newSiteDescription, setNewSiteDescription] = useState('')
 	const [isCreating, setIsCreating] = useState(false)
+	const [pendingDelete, setPendingDelete] = useState(null)
+	const [isDeleting, setIsDeleting] = useState(false)
 
 	useEffect(() => {
 		;(async () => {
@@ -30,7 +35,7 @@ export default function Dashboard() {
 				const loaded = await siteService.getAllSites()
 				setSites(Array.isArray(loaded) ? loaded : [])
 			} catch (error) {
-				setErrorMessage(error.message || 'Impossible de charger les sites.')
+				setErrorMessage(error.message || 'Failed to load sites.')
 			} finally {
 				setIsLoading(false)
 			}
@@ -47,7 +52,7 @@ export default function Dashboard() {
 		event.preventDefault()
 		const name = newSiteName.trim()
 		if (!name) {
-			setErrorMessage('Le nom du site est requis.')
+			setErrorMessage('Site name is required.')
 			return
 		}
 		setIsCreating(true)
@@ -58,20 +63,26 @@ export default function Dashboard() {
 			setNewSiteName('')
 			setNewSiteDescription('')
 			setShowCreate(false)
+			toast.success(`"${name}" created`)
 		} catch (error) {
-			setErrorMessage(error.message || 'La création du site a échoué.')
+			toast.error(error.message || 'Failed to create site.')
 		} finally {
 			setIsCreating(false)
 		}
 	}
 
-	const handleDeleteSite = async (siteId, siteName) => {
-		if (!window.confirm(`Supprimer le site « ${siteName} » ?`)) return
+	const confirmDelete = async () => {
+		if (!pendingDelete) return
+		setIsDeleting(true)
 		try {
-			await siteService.deleteSite(siteId)
-			setSites((prev) => prev.filter((s) => getSiteId(s) !== siteId))
+			await siteService.deleteSite(pendingDelete.id)
+			setSites((prev) => prev.filter((s) => getSiteId(s) !== pendingDelete.id))
+			toast.success('Site deleted')
+			setPendingDelete(null)
 		} catch (error) {
-			setErrorMessage(error.message || 'La suppression a échoué.')
+			toast.error(error.message || 'Failed to delete the site.')
+		} finally {
+			setIsDeleting(false)
 		}
 	}
 
@@ -79,8 +90,8 @@ export default function Dashboard() {
 
 	return (
 		<AppShell
-			title="Mes sites"
-			subtitle={isLoading ? 'Chargement…' : `${filteredSites.length} site(s)`}
+			title="My sites"
+			subtitle={isLoading ? 'Loading...' : `${filteredSites.length} site(s)`}
 			actions={
 				<div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
 					<div className="min-w-[200px] flex-1 sm:flex-none">
@@ -88,13 +99,13 @@ export default function Dashboard() {
 							id="site-search"
 							variant="search"
 							fullWidth
-							placeholder="Rechercher un site…"
+							placeholder="Search sites..."
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
 						/>
 					</div>
 					<Button variant="primary" size="sm" onClick={() => setShowCreate((v) => !v)}>
-						{showCreate ? 'Fermer' : '+ Nouveau site'}
+						{showCreate ? 'Close' : '+ New site'}
 					</Button>
 				</div>
 			}
@@ -115,8 +126,8 @@ export default function Dashboard() {
 							id="new-site-name"
 							variant="search"
 							fullWidth
-							label="Nom du site"
-							placeholder="Ex : Portfolio agence"
+							label="Site name"
+							placeholder="e.g. Agency portfolio"
 							value={newSiteName}
 							onChange={(e) => setNewSiteName(e.target.value)}
 						/>
@@ -125,17 +136,17 @@ export default function Dashboard() {
 							variant="search"
 							fullWidth
 							label="Description"
-							placeholder="Ex : Site vitrine moderne"
+							placeholder="e.g. Modern showcase site"
 							value={newSiteDescription}
 							onChange={(e) => setNewSiteDescription(e.target.value)}
 						/>
 					</div>
 					<div className="mt-4 flex items-center gap-2">
 						<Button type="submit" variant="primary" size="sm" isLoading={isCreating} disabled={!newSiteName.trim()}>
-							Créer le site
+							Create site
 						</Button>
 						<span className="text-xs text-light-white4">
-							Astuce : partez d'un modèle depuis la page Templates pour un contenu prérempli.
+							Tip: start from a template on the Templates page for pre-filled content.
 						</span>
 					</div>
 				</form>
@@ -154,17 +165,17 @@ export default function Dashboard() {
 				</div>
 			) : filteredSites.length === 0 ? (
 				<div className="rounded-2xl border border-dashed border-light-white3 bg-light-white1 p-10 text-center">
-					<h3 className="text-lg font-semibold">Aucun site</h3>
+					<h3 className="text-lg font-semibold">No sites</h3>
 					<p className="mt-1 text-sm text-light-white4">
-						{searchQuery ? 'Aucun résultat pour cette recherche.' : 'Créez votre premier site pour commencer.'}
+						{searchQuery ? 'No results for this search.' : 'Create your first site to get started.'}
 					</p>
 					{!searchQuery ? (
 						<div className="mt-4 flex items-center justify-center gap-2">
 							<Button variant="primary" size="sm" onClick={() => setShowCreate(true)}>
-								+ Nouveau site
+								+ New site
 							</Button>
 							<Button variant="outline" size="sm" onClick={() => navigate('/templates')}>
-								Parcourir les modèles
+								Browse templates
 							</Button>
 						</div>
 					) : null}
@@ -184,7 +195,7 @@ export default function Dashboard() {
 											published ? 'bg-emerald-50 text-emerald-700' : 'bg-light-white2 text-light-white4'
 										}`}
 									>
-										{published ? 'Publié' : 'Brouillon'}
+										{published ? 'Published' : 'Draft'}
 									</span>
 								</div>
 
@@ -206,14 +217,14 @@ export default function Dashboard() {
 
 								<div className="mt-4 flex items-center gap-2">
 									<Button variant="primary" size="sm" onClick={() => openSite(site)}>
-										Ouvrir
+										Open
 									</Button>
 									<Button
 										variant="outline"
 										size="sm"
-										onClick={() => handleDeleteSite(getSiteId(site), getSiteName(site))}
+										onClick={() => setPendingDelete({ id: getSiteId(site), name: getSiteName(site) })}
 									>
-										Supprimer
+										Delete
 									</Button>
 								</div>
 							</article>
@@ -221,6 +232,15 @@ export default function Dashboard() {
 					})}
 				</div>
 			)}
+			<ConfirmDialog
+				open={!!pendingDelete}
+				title="Delete site"
+				message={pendingDelete ? `"${pendingDelete.name}" will be permanently deleted. This cannot be undone.` : ''}
+				confirmLabel="Delete"
+				busy={isDeleting}
+				onConfirm={confirmDelete}
+				onCancel={() => setPendingDelete(null)}
+			/>
 		</AppShell>
 	)
 }

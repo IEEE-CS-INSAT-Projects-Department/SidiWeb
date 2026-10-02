@@ -5,6 +5,7 @@ import Card from '../../../shared/components/Card'
 import { Input } from '../../../shared/components/Input'
 import { Button } from '../../../shared/components/Button'
 import { Alert } from '../../../shared/components/Alert'
+import logo from '../../../assets/logo.png'
 import { validateSignup } from '../validate'
 import { register } from '../services/authService'
 
@@ -36,7 +37,26 @@ function Register() {
 	}
 
 	return (
-		<main className="flex min-h-screen w-full items-center justify-center bg-vitrine-black1 px-4 py-10">
+		<main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-vitrine-black1 px-4 py-10 text-vitrine-white1">
+			<div className="pointer-events-none absolute inset-0">
+				<div className="absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-dark-red1/25 blur-[120px]" />
+				<div className="absolute bottom-0 right-8 h-64 w-64 rounded-full bg-vitrine-red1/20 blur-[120px]" />
+			</div>
+
+			<div className="relative z-10 mb-5 flex w-full max-w-[480px] items-center justify-between">
+				<Link
+					to="/"
+					className="inline-flex items-center gap-1.5 text-sm text-vitrine-grey1 transition hover:text-vitrine-white1"
+				>
+					<span aria-hidden="true">←</span> Back to home
+				</Link>
+				<Link to="/" className="flex items-center gap-2">
+					<img src={logo} alt="SidiWeb" className="h-7 w-auto object-contain" />
+					<span className="text-sm font-bold">SidiWeb</span>
+				</Link>
+			</div>
+
+			<div className="animate-rise relative z-10 w-full max-w-[480px]">
 			<Card variant="auth" title="Create your account" description="Start building sites with SidiWeb">
 				<form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
 					{submitError ? <Alert theme="dark" status="error" message={submitError} /> : null}
@@ -89,6 +109,7 @@ function Register() {
 					</Link>
 				</p>
 			</Card>
+			</div>
 		</main>
 	)
 }

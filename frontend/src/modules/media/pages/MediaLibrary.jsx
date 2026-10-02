@@ -4,6 +4,8 @@ import AppShell from '../../../shared/layout/AppShell'
 import { Button } from '../../../shared/components/Button'
 import { Alert } from '../../../shared/components/Alert'
 import LoadingSpinner from '../../../shared/components/LoadingSpinner'
+import ConfirmDialog from '../../../shared/components/ConfirmDialog'
+import { useToast } from '../../../shared/components/ToastProvider'
 import { listMedia, uploadMedia, deleteMedia, getMediaBlobUrl } from '../services/mediaService'
 
 function MediaThumb({ item, onDelete }) {
@@ -33,7 +35,7 @@ function MediaThumb({ item, onDelete }) {
 				{src ? (
 					<img src={src} alt={item.filename} className="h-full w-full object-cover" />
 				) : (
-					<span className="text-xs text-light-white4">Aperçu…</span>
+					<span className="text-xs text-light-white4">Preview...</span>
 				)}
 			</div>
 			<div className="flex items-center justify-between gap-2 p-3">
@@ -45,7 +47,7 @@ function MediaThumb({ item, onDelete }) {
 					onClick={() => onDelete(id)}
 					className="shrink-0 text-sm font-medium text-light-red1 hover:underline"
 				>
-					Supprimer
+					Delete
 				</button>
 			</div>
 		</article>
@@ -53,8 +55,11 @@ function MediaThumb({ item, onDelete }) {
 }
 
 export default function MediaLibrary() {
+	const toast = useToast()
 	const inputRef = useRef(null)
 	const [items, setItems] = useState([])
+	const [pendingDelete, setPendingDelete] = useState(null)
+	const [isDeleting, setIsDeleting] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [uploading, setUploading] = useState(false)
 	const [error, setError] = useState('')
@@ -78,12 +83,12 @@ export default function MediaLibrary() {
 		if (!file) return
 		setError('')
 		if (!file.type.startsWith('image/')) {
-			setError('Seules les images (JPG/PNG) sont acceptées.')
+			setError('Only JPG/PNG images are allowed.')
 			e.target.value = ''
 			return
 		}
 		if (file.size > 5 * 1024 * 1024) {
-			setError('La taille maximale est de 5 Mo.')
+			setError('Maximum size is 5 MB.')
 			e.target.value = ''
 			return
 		}
@@ -91,29 +96,34 @@ export default function MediaLibrary() {
 		try {
 			await uploadMedia(file)
 			await refresh()
+			toast.success('Image uploaded')
 		} catch (err) {
-			setError(err.message)
+			toast.error(err.message)
 		} finally {
 			setUploading(false)
 			if (inputRef.current) inputRef.current.value = ''
 		}
 	}
 
-	const onDelete = async (id) => {
-		if (!window.confirm('Supprimer cette image ?')) return
-		setError('')
+	const confirmDelete = async () => {
+		if (!pendingDelete) return
+		setIsDeleting(true)
 		try {
-			await deleteMedia(id)
-			setItems((prev) => prev.filter((m) => (m.id || m._id) !== id))
+			await deleteMedia(pendingDelete)
+			setItems((prev) => prev.filter((m) => (m.id || m._id) !== pendingDelete))
+			toast.success('Image deleted')
+			setPendingDelete(null)
 		} catch (err) {
-			setError(err.message)
+			toast.error(err.message)
+		} finally {
+			setIsDeleting(false)
 		}
 	}
 
 	return (
 		<AppShell
-			title="Bibliothèque média"
-			subtitle="Téléchargez et gérez vos images (JPG/PNG, max 5 Mo)"
+			title="Media library"
+			subtitle="Upload and manage your images (JPG/PNG, max 5 MB)"
 			actions={
 				<>
 					<input
@@ -124,7 +134,7 @@ export default function MediaLibrary() {
 						onChange={onPick}
 					/>
 					<Button variant="primary" isLoading={uploading} onClick={() => inputRef.current?.click()}>
-						Téléverser une image
+						Upload an image
 					</Button>
 				</>
 			}
@@ -136,18 +146,28 @@ export default function MediaLibrary() {
 			) : null}
 
 			{loading ? (
-				<LoadingSpinner theme="light" label="Chargement de la bibliothèque..." />
+				<LoadingSpinner theme="light" label="Loading library..." />
 			) : items.length === 0 ? (
 				<div className="rounded-2xl border border-dashed border-light-white3 p-10 text-center text-sm text-light-white4">
-					Aucune image. Téléversez votre première image.
+					No images yet. Upload your first image.
 				</div>
 			) : (
 				<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
 					{items.map((item) => (
-						<MediaThumb key={item.id || item._id} item={item} onDelete={onDelete} />
+						<MediaThumb key={item.id || item._id} item={item} onDelete={setPendingDelete} />
 					))}
 				</div>
 			)}
+
+			<ConfirmDialog
+				open={!!pendingDelete}
+				title="Delete image"
+				message="This image will be permanently deleted."
+				confirmLabel="Delete"
+				busy={isDeleting}
+				onConfirm={confirmDelete}
+				onCancel={() => setPendingDelete(null)}
+			/>
 		</AppShell>
 	)
 }

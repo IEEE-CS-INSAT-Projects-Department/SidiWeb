@@ -1,12 +1,23 @@
 {
   "id": "education_academique",
-  "name": "Éducation",
-  "description": "Template pour écoles et plateformes éducatives.",
+  "name": "Education",
+  "description": "Template for schools and educational platforms.",
   "category": "education",
   "structure": {
-    "pages": ["Accueil", "Cours", "Formateurs", "Contact"],
+    "pages": [
+      "Home",
+      "Courses",
+      "Instructors",
+      "Contact"
+    ],
     "layout": "academique",
-    "colors": { "primary": "#1a237e", "secondary": "#7986cb" },
-    "features": ["liste_cours", "inscription"]
+    "colors": {
+      "primary": "#1a237e",
+      "secondary": "#7986cb"
+    },
+    "features": [
+      "liste_cours",
+      "inscription"
+    ]
   }
 }

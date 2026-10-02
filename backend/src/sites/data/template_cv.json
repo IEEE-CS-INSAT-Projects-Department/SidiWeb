@@ -1,12 +1,22 @@
 {
   "id": "cv_en_ligne",
-  "name": "CV en ligne",
-  "description": "Template pour créer un CV web professionnel.",
+  "name": "Online CV",
+  "description": "Template to create a professional web CV.",
   "category": "cv",
   "structure": {
-    "pages": ["Profil", "Expérience", "Compétences", "Contact"],
+    "pages": [
+      "Profile",
+      "Experience",
+      "Skills",
+      "Contact"
+    ],
     "layout": "vertical",
-    "colors": { "primary": "#37474f", "secondary": "#90a4ae" },
-    "features": ["telechargement_cv"]
+    "colors": {
+      "primary": "#37474f",
+      "secondary": "#90a4ae"
+    },
+    "features": [
+      "telechargement_cv"
+    ]
   }
 }

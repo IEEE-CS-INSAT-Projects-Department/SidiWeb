@@ -1,12 +1,22 @@
 {
   "id": "site_vitrine",
-  "name": "Site Vitrine",
-  "description": "Template simple pour présence en ligne.",
-  "category": "vitrine",
+  "name": "Showcase Site",
+  "description": "Simple template for an online presence.",
+  "category": "showcase",
   "structure": {
-    "pages": ["Accueil", "À propos", "Contact"],
+    "pages": [
+      "Home",
+      "About",
+      "Contact"
+    ],
     "layout": "simple",
-    "colors": { "primary": "#1b5e20", "secondary": "#81c784" },
-    "features": ["presentation", "contact"]
+    "colors": {
+      "primary": "#1b5e20",
+      "secondary": "#81c784"
+    },
+    "features": [
+      "presentation",
+      "contact"
+    ]
   }
 }

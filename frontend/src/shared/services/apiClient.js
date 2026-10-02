@@ -18,14 +18,24 @@ function messageFrom(payload, status) {
 		if (Array.isArray(d) && d[0]?.msg) return d[0].msg
 		if (payload.message) return payload.message
 	}
+	if (status >= 500) return 'The server encountered an error, please try again later'
 	return `Request failed (${status})`
+}
+
+async function safeFetch(url, options) {
+	try {
+		return await fetch(url, options)
+	} catch {
+		// Network error / server unreachable / CORS failure
+		throw new Error('Cannot reach the server. Check your connection and try again.')
+	}
 }
 
 async function handle(response) {
 	if (response.status === 401) {
 		clearToken()
 		if (typeof window !== 'undefined') window.location.assign('/login')
-		throw new Error('Session expired. Please log in again.')
+		throw new Error('Your session has expired, please log in again')
 	}
 	let payload = null
 	if ((response.headers.get('content-type') || '').includes('application/json')) {
@@ -36,12 +46,12 @@ async function handle(response) {
 }
 
 export async function apiGet(path) {
-	return handle(await fetch(buildUrl(path), { headers: authHeaders() }))
+	return handle(await safeFetch(buildUrl(path), { headers: authHeaders() }))
 }
 
 export async function apiPost(path, body) {
 	return handle(
-		await fetch(buildUrl(path), {
+		await safeFetch(buildUrl(path), {
 			method: 'POST',
 			headers: authHeaders({ 'Content-Type': 'application/json' }),
 			body: JSON.stringify(body),
@@ -51,7 +61,7 @@ export async function apiPost(path, body) {
 
 export async function apiPut(path, body) {
 	return handle(
-		await fetch(buildUrl(path), {
+		await safeFetch(buildUrl(path), {
 			method: 'PUT',
 			headers: authHeaders({ 'Content-Type': 'application/json' }),
 			body: JSON.stringify(body),
@@ -60,21 +70,21 @@ export async function apiPut(path, body) {
 }
 
 export async function apiDelete(path) {
-	return handle(await fetch(buildUrl(path), { method: 'DELETE', headers: authHeaders() }))
+	return handle(await safeFetch(buildUrl(path), { method: 'DELETE', headers: authHeaders() }))
 }
 
 export async function apiUpload(path, formData) {
-	return handle(await fetch(buildUrl(path), { method: 'POST', headers: authHeaders(), body: formData }))
+	return handle(await safeFetch(buildUrl(path), { method: 'POST', headers: authHeaders(), body: formData }))
 }
 
 export async function apiGetBlob(path) {
-	const response = await fetch(buildUrl(path), { headers: authHeaders() })
+	const response = await safeFetch(buildUrl(path), { headers: authHeaders() })
 	if (response.status === 401) {
 		clearToken()
 		if (typeof window !== 'undefined') window.location.assign('/login')
-		throw new Error('Session expired')
+		throw new Error('Your session has expired, please log in again')
 	}
-	if (!response.ok) throw new Error(`Failed to load (${response.status})`)
+	if (!response.ok) throw new Error("Failed to load image")
 	return response.blob()
 }
 

@@ -169,11 +169,31 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    errors = exc.errors()
+    # Surface a single human-readable message (the first validation error)
+    first = errors[0] if errors else {}
+    message = first.get("msg") or "Invalid input"
+    if message.startswith("Value error, "):
+        message = message[len("Value error, "):]
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content=jsonable_encoder({
-            "detail": exc.errors(),
-            "body": exc.body,
-            "path": request.url.path
+            "detail": message,
+            "message": message,
+            "errors": errors,
+            "path": request.url.path,
         })
+    )
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception):
+    logger.exception("Unhandled error on %s: %s", request.url.path, exc)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "An internal error occurred, please try again later",
+            "status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+            "path": request.url.path,
+        },
     )
