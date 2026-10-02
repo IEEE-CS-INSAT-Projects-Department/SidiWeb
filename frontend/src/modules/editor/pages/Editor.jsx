@@ -5,11 +5,12 @@ import AppShell from '../../../shared/layout/AppShell'
 import { Button } from '../../../shared/components/Button'
 import { Alert } from '../../../shared/components/Alert'
 import LoadingSpinner from '../../../shared/components/LoadingSpinner'
+import { useToast } from '../../../shared/components/ToastProvider'
 import { getSite, updateSite } from '../../home/services/siteService'
 
 const BLOCK_TYPES = [
 	{ type: 'heading', label: 'Heading', defaults: { text: 'Main heading' } },
-	{ type: 'paragraph', label: 'Text', defaults: { text: 'Your text here…' } },
+	{ type: 'paragraph', label: 'Text', defaults: { text: 'Your text here...' } },
 	{ type: 'image', label: 'Image', defaults: { url: '', alt: 'Image' } },
 	{ type: 'button', label: 'Button', defaults: { label: 'Click here', href: '#' } },
 	{ type: 'divider', label: 'Divider', defaults: {} },
@@ -97,11 +98,11 @@ function BlockEditor({ block, onChange }) {
 export default function Editor() {
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const toast = useToast()
 	const [site, setSite] = useState(null)
 	const [blocks, setBlocks] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
-	const [status, setStatus] = useState('')
 	const [saving, setSaving] = useState(false)
 	const [device, setDevice] = useState('desktop')
 	const dragIndex = useRef(null)
@@ -128,7 +129,6 @@ export default function Editor() {
 	const addBlock = (type) => {
 		const def = BLOCK_TYPES.find((b) => b.type === type)
 		setBlocks((prev) => [...prev, { id: newId(), type, data: { ...def.defaults } }])
-		setStatus('')
 	}
 	const updateBlock = (index, next) => setBlocks((prev) => prev.map((b, i) => (i === index ? next : b)))
 	const removeBlock = (index) => setBlocks((prev) => prev.filter((_, i) => i !== index))
@@ -156,13 +156,13 @@ export default function Editor() {
 	const save = async () => {
 		setSaving(true)
 		setError('')
-		setStatus('')
 		try {
 			const updated = await updateSite(id, { content: { blocks } })
 			setSite(updated)
-			setStatus('Saved ✓')
+			toast.success('Changes saved')
 		} catch (e) {
 			setError(e.message)
+			toast.error(e.message)
 		} finally {
 			setSaving(false)
 		}
@@ -174,9 +174,10 @@ export default function Editor() {
 		try {
 			const updated = await updateSite(id, { content: { blocks }, published: true })
 			setSite(updated)
-			setStatus(updated.public_url ? `Published: ${updated.public_url}` : 'Published ✓')
+			toast.success(updated.public_url ? `Published at ${updated.public_url}` : 'Site published')
 		} catch (e) {
 			setError(e.message)
+			toast.error(e.message)
 		} finally {
 			setSaving(false)
 		}
@@ -219,11 +220,6 @@ export default function Editor() {
 			{error ? (
 				<div className="mb-4">
 					<Alert theme="light" status="error" message={error} />
-				</div>
-			) : null}
-			{status ? (
-				<div className="mb-4">
-					<Alert theme="light" status="success" message={status} />
 				</div>
 			) : null}
 

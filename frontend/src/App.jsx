@@ -8,6 +8,7 @@ import TemplateGallery from './modules/templates/pages/TemplateGallery'
 import Editor from './modules/editor/pages/Editor'
 import Assistant from './modules/assistant/pages/Assistant'
 import MediaLibrary from './modules/media/pages/MediaLibrary'
+import { ToastProvider } from './shared/components/ToastProvider'
 import { isAuthenticated } from './modules/auth/services/authService'
 
 function ProtectedRoute({ children }) {
@@ -16,7 +17,8 @@ function ProtectedRoute({ children }) {
 
 function App() {
   return (
-    <BrowserRouter>
+    <ToastProvider>
+      <BrowserRouter>
       <div className="w-full min-w-0 overflow-x-hidden">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -66,7 +68,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ToastProvider>
   )
 }
 

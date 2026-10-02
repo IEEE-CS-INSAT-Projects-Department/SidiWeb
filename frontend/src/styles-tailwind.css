@@ -89,5 +89,56 @@
 	h3,
 	h4 {
 		font-family: var(--font-display);
+		letter-spacing: -0.01em;
+	}
+
+	/* Accessible, on-brand focus ring for keyboard users */
+	:focus-visible {
+		outline: 2px solid var(--color-light-red1);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	::selection {
+		background-color: var(--color-light-red1);
+		color: #fff;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+@layer utilities {
+	@keyframes sw-rise {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes sw-fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+	.animate-rise {
+		animation: sw-rise 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	.animate-fade {
+		animation: sw-fade 0.2s ease-out both;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animate-rise,
+		.animate-fade {
+			animation: none;
+		}
 	}
 }

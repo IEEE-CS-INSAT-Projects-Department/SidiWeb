@@ -5,14 +5,17 @@ import AppShell from '../../../shared/layout/AppShell'
 import { Input } from '../../../shared/components/Input'
 import { Button } from '../../../shared/components/Button'
 import { Alert } from '../../../shared/components/Alert'
+import ConfirmDialog from '../../../shared/components/ConfirmDialog'
+import { useToast } from '../../../shared/components/ToastProvider'
 import siteService from '../services/siteService'
 
 const getSiteId = (site, fallback) => site.id ?? site._id ?? site.siteId ?? fallback
-const getSiteName = (site) => site.name || site.title || 'Site sans nom'
+const getSiteName = (site) => site.name || site.title || 'Untitled site'
 const getSiteDescription = (site) => site.description || 'No description available.'
 
 export default function Dashboard() {
 	const navigate = useNavigate()
+	const toast = useToast()
 	const [sites, setSites] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 	const [searchQuery, setSearchQuery] = useState('')
@@ -21,6 +24,8 @@ export default function Dashboard() {
 	const [newSiteName, setNewSiteName] = useState('')
 	const [newSiteDescription, setNewSiteDescription] = useState('')
 	const [isCreating, setIsCreating] = useState(false)
+	const [pendingDelete, setPendingDelete] = useState(null)
+	const [isDeleting, setIsDeleting] = useState(false)
 
 	useEffect(() => {
 		;(async () => {
@@ -58,20 +63,26 @@ export default function Dashboard() {
 			setNewSiteName('')
 			setNewSiteDescription('')
 			setShowCreate(false)
+			toast.success(`"${name}" created`)
 		} catch (error) {
-			setErrorMessage(error.message || 'Failed to create site.')
+			toast.error(error.message || 'Failed to create site.')
 		} finally {
 			setIsCreating(false)
 		}
 	}
 
-	const handleDeleteSite = async (siteId, siteName) => {
-		if (!window.confirm(`Delete site "${siteName}"?`)) return
+	const confirmDelete = async () => {
+		if (!pendingDelete) return
+		setIsDeleting(true)
 		try {
-			await siteService.deleteSite(siteId)
-			setSites((prev) => prev.filter((s) => getSiteId(s) !== siteId))
+			await siteService.deleteSite(pendingDelete.id)
+			setSites((prev) => prev.filter((s) => getSiteId(s) !== pendingDelete.id))
+			toast.success('Site deleted')
+			setPendingDelete(null)
 		} catch (error) {
-			setErrorMessage(error.message || 'Failed to delete the site.')
+			toast.error(error.message || 'Failed to delete the site.')
+		} finally {
+			setIsDeleting(false)
 		}
 	}
 
@@ -80,7 +91,7 @@ export default function Dashboard() {
 	return (
 		<AppShell
 			title="My sites"
-			subtitle={isLoading ? 'Loading…' : `${filteredSites.length} site(s)`}
+			subtitle={isLoading ? 'Loading...' : `${filteredSites.length} site(s)`}
 			actions={
 				<div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
 					<div className="min-w-[200px] flex-1 sm:flex-none">
@@ -88,7 +99,7 @@ export default function Dashboard() {
 							id="site-search"
 							variant="search"
 							fullWidth
-							placeholder="Search sites…"
+							placeholder="Search sites..."
 							value={searchQuery}
 							onChange={(e) => setSearchQuery(e.target.value)}
 						/>
@@ -211,7 +222,7 @@ export default function Dashboard() {
 									<Button
 										variant="outline"
 										size="sm"
-										onClick={() => handleDeleteSite(getSiteId(site), getSiteName(site))}
+										onClick={() => setPendingDelete({ id: getSiteId(site), name: getSiteName(site) })}
 									>
 										Delete
 									</Button>
@@ -221,6 +232,15 @@ export default function Dashboard() {
 					})}
 				</div>
 			)}
+			<ConfirmDialog
+				open={!!pendingDelete}
+				title="Delete site"
+				message={pendingDelete ? `"${pendingDelete.name}" will be permanently deleted. This cannot be undone.` : ''}
+				confirmLabel="Delete"
+				busy={isDeleting}
+				onConfirm={confirmDelete}
+				onCancel={() => setPendingDelete(null)}
+			/>
 		</AppShell>
 	)
 }
