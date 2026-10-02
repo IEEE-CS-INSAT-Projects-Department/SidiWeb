@@ -19,7 +19,7 @@ const sizeStyles = {
 	XL: 'w-20 h-20 border-[5px]',
 }
 
-export const LoadingSpinner = ({ theme = 'dark', size = 'L', label = 'Chargement...', className = '' }) => {
+export const LoadingSpinner = ({ theme = 'dark', size = 'L', label = 'Loading...', className = '' }) => {
 	const selectedTheme = themeStyles[theme] || themeStyles.dark
 	const normalizedSize = typeof size === 'string' ? size.toUpperCase() : 'L'
 	const selectedSize = sizeStyles[normalizedSize] || sizeStyles.L

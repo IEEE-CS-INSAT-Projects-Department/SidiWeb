@@ -10,8 +10,8 @@ function errorMessage(payload, status) {
 		if (Array.isArray(d) && d[0]?.msg) return d[0].msg
 		if (payload.message) return payload.message
 	}
-	if (status >= 500) return 'Le serveur a rencontré une erreur, veuillez réessayer plus tard'
-	return `La requête a échoué (${status})`
+	if (status >= 500) return 'The server encountered an error, please try again later'
+	return `Request failed (${status})`
 }
 
 async function request(url, options = {}) {
@@ -27,13 +27,13 @@ async function request(url, options = {}) {
 			...options
 		})
 	} catch {
-		throw new Error('Impossible de contacter le serveur. Vérifiez votre connexion et réessayez.')
+		throw new Error('Cannot reach the server. Check your connection and try again.')
 	}
 
 	if (response.status === 401) {
 		clearToken()
 		if (typeof window !== 'undefined') window.location.assign('/login')
-		throw new Error('Votre session a expiré, veuillez vous reconnecter')
+		throw new Error('Your session has expired, please log in again')
 	}
 
 	let payload = null

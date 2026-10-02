@@ -37,8 +37,8 @@ function extractError(payload, status) {
 		if (Array.isArray(payload.detail) && payload.detail[0]?.msg) return payload.detail[0].msg
 		if (payload.message) return payload.message
 	}
-	if (status >= 500) return 'Le serveur a rencontré une erreur, veuillez réessayer plus tard'
-	return `La requête a échoué (${status})`
+	if (status >= 500) return 'The server encountered an error, please try again later'
+	return `Request failed (${status})`
 }
 
 async function postJson(url, body) {
@@ -50,7 +50,7 @@ async function postJson(url, body) {
 			body: JSON.stringify(body),
 		})
 	} catch {
-		throw new Error('Impossible de contacter le serveur. Vérifiez votre connexion et réessayez.')
+		throw new Error('Cannot reach the server. Check your connection and try again.')
 	}
 
 	let payload = null

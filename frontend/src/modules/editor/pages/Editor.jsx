@@ -8,12 +8,12 @@ import LoadingSpinner from '../../../shared/components/LoadingSpinner'
 import { getSite, updateSite } from '../../home/services/siteService'
 
 const BLOCK_TYPES = [
-	{ type: 'heading', label: 'Titre', defaults: { text: 'Titre principal' } },
-	{ type: 'paragraph', label: 'Texte', defaults: { text: 'Votre texte ici…' } },
+	{ type: 'heading', label: 'Heading', defaults: { text: 'Main heading' } },
+	{ type: 'paragraph', label: 'Text', defaults: { text: 'Your text here…' } },
 	{ type: 'image', label: 'Image', defaults: { url: '', alt: 'Image' } },
-	{ type: 'button', label: 'Bouton', defaults: { label: 'Cliquez ici', href: '#' } },
-	{ type: 'divider', label: 'Séparateur', defaults: {} },
-	{ type: 'contact', label: 'Contact', defaults: { title: 'Contactez-nous' } },
+	{ type: 'button', label: 'Button', defaults: { label: 'Click here', href: '#' } },
+	{ type: 'divider', label: 'Divider', defaults: {} },
+	{ type: 'contact', label: 'Contact', defaults: { title: 'Contact us' } },
 ]
 
 const DEVICE_WIDTH = { desktop: '100%', tablet: '768px', mobile: '375px' }
@@ -30,7 +30,7 @@ function BlockPreview({ block }) {
 			<img src={data.url} alt={data.alt} className="max-h-60 w-full rounded-lg object-cover" />
 		) : (
 			<div className="flex h-32 items-center justify-center rounded-lg bg-gray-100 text-sm text-gray-400">
-				Image (ajoutez une URL)
+				Image (add a URL)
 			</div>
 		)
 	if (type === 'button')
@@ -49,10 +49,10 @@ function BlockPreview({ block }) {
 			<div className="rounded-lg border border-gray-200 p-4">
 				<h3 className="mb-3 font-semibold text-gray-900">{data.title}</h3>
 				<div className="flex flex-col gap-2">
-					<input className="h-9 rounded border border-gray-300 px-3 text-sm" placeholder="Nom" disabled />
+					<input className="h-9 rounded border border-gray-300 px-3 text-sm" placeholder="Name" disabled />
 					<input className="h-9 rounded border border-gray-300 px-3 text-sm" placeholder="Email" disabled />
 					<button className="h-9 rounded bg-red-600 text-sm text-white" disabled>
-						Envoyer
+						Send
 					</button>
 				</div>
 			</div>
@@ -78,20 +78,20 @@ function BlockEditor({ block, onChange }) {
 	if (block.type === 'image') {
 		return (
 			<div className="flex flex-col gap-2">
-				<input className={inputClass} placeholder="URL de l'image" value={block.data.url || ''} onChange={(e) => set('url', e.target.value)} />
-				<input className={inputClass} placeholder="Texte alternatif" value={block.data.alt || ''} onChange={(e) => set('alt', e.target.value)} />
+				<input className={inputClass} placeholder="Image URL" value={block.data.url || ''} onChange={(e) => set('url', e.target.value)} />
+				<input className={inputClass} placeholder="Alt text" value={block.data.alt || ''} onChange={(e) => set('alt', e.target.value)} />
 			</div>
 		)
 	}
 	if (block.type === 'button') {
 		return (
 			<div className="flex flex-col gap-2">
-				<input className={inputClass} placeholder="Libellé" value={block.data.label || ''} onChange={(e) => set('label', e.target.value)} />
-				<input className={inputClass} placeholder="Lien (href)" value={block.data.href || ''} onChange={(e) => set('href', e.target.value)} />
+				<input className={inputClass} placeholder="Label" value={block.data.label || ''} onChange={(e) => set('label', e.target.value)} />
+				<input className={inputClass} placeholder="Link (href)" value={block.data.href || ''} onChange={(e) => set('href', e.target.value)} />
 			</div>
 		)
 	}
-	return <p className="text-xs text-light-white4">Aucune option</p>
+	return <p className="text-xs text-light-white4">No options</p>
 }
 
 export default function Editor() {
@@ -160,7 +160,7 @@ export default function Editor() {
 		try {
 			const updated = await updateSite(id, { content: { blocks } })
 			setSite(updated)
-			setStatus('Enregistré ✓')
+			setStatus('Saved ✓')
 		} catch (e) {
 			setError(e.message)
 		} finally {
@@ -174,7 +174,7 @@ export default function Editor() {
 		try {
 			const updated = await updateSite(id, { content: { blocks }, published: true })
 			setSite(updated)
-			setStatus(updated.public_url ? `Publié : ${updated.public_url}` : 'Publié ✓')
+			setStatus(updated.public_url ? `Published: ${updated.public_url}` : 'Published ✓')
 		} catch (e) {
 			setError(e.message)
 		} finally {
@@ -184,18 +184,18 @@ export default function Editor() {
 
 	if (loading) {
 		return (
-			<AppShell title="Éditeur">
-				<LoadingSpinner theme="light" label="Chargement du site..." />
+			<AppShell title="Editor">
+				<LoadingSpinner theme="light" label="Loading site..." />
 			</AppShell>
 		)
 	}
 
 	if (error && !site) {
 		return (
-			<AppShell title="Éditeur">
+			<AppShell title="Editor">
 				<Alert theme="light" status="error" message={error} />
 				<Link to="/dashboard" className="mt-4 inline-block text-sm text-light-red1 hover:underline">
-					← Retour au tableau de bord
+					← Back to dashboard
 				</Link>
 			</AppShell>
 		)
@@ -203,15 +203,15 @@ export default function Editor() {
 
 	return (
 		<AppShell
-			title={`Éditeur — ${site?.name || ''}`}
-			subtitle={site?.published ? 'Publié' : 'Brouillon'}
+			title={`Editor — ${site?.name || ''}`}
+			subtitle={site?.published ? 'Published' : 'Draft'}
 			actions={
 				<div className="flex items-center gap-2">
 					<Button variant="outline" size="sm" isLoading={saving} onClick={save}>
-						Enregistrer
+						Save
 					</Button>
 					<Button variant="primary" size="sm" isLoading={saving} onClick={publish}>
-						Publier
+						Publish
 					</Button>
 				</div>
 			}
@@ -231,7 +231,7 @@ export default function Editor() {
 				{/* Editing panel */}
 				<div className="flex flex-col gap-4">
 					<div className="rounded-2xl border border-light-white3 bg-light-white1 p-4">
-						<p className="mb-2 text-sm font-semibold">Ajouter un bloc</p>
+						<p className="mb-2 text-sm font-semibold">Add a block</p>
 						<div className="flex flex-wrap gap-2">
 							{BLOCK_TYPES.map((b) => (
 								<button
@@ -247,7 +247,7 @@ export default function Editor() {
 					</div>
 
 					{blocks.length === 0 ? (
-						<p className="text-sm text-light-white4">Aucun bloc. Ajoutez-en un pour commencer.</p>
+						<p className="text-sm text-light-white4">No blocks yet. Add one to get started.</p>
 					) : (
 						blocks.map((block, index) => (
 							<div
@@ -263,9 +263,9 @@ export default function Editor() {
 										⠿ {block.type}
 									</span>
 									<div className="flex items-center gap-1">
-										<button type="button" onClick={() => move(index, -1)} className="px-1.5 text-light-white4 hover:text-light-black" aria-label="Monter">↑</button>
-										<button type="button" onClick={() => move(index, 1)} className="px-1.5 text-light-white4 hover:text-light-black" aria-label="Descendre">↓</button>
-										<button type="button" onClick={() => removeBlock(index)} className="px-1.5 text-light-red1 hover:underline" aria-label="Supprimer">✕</button>
+										<button type="button" onClick={() => move(index, -1)} className="px-1.5 text-light-white4 hover:text-light-black" aria-label="Move up">↑</button>
+										<button type="button" onClick={() => move(index, 1)} className="px-1.5 text-light-white4 hover:text-light-black" aria-label="Move down">↓</button>
+										<button type="button" onClick={() => removeBlock(index)} className="px-1.5 text-light-red1 hover:underline" aria-label="Delete">✕</button>
 									</div>
 								</div>
 								<BlockEditor block={block} onChange={(next) => updateBlock(index, next)} />
@@ -277,7 +277,7 @@ export default function Editor() {
 				{/* Live preview */}
 				<div>
 					<div className="mb-3 flex items-center gap-2">
-						<span className="text-sm text-light-white4">Aperçu :</span>
+						<span className="text-sm text-light-white4">Preview:</span>
 						{['desktop', 'tablet', 'mobile'].map((d) => (
 							<button
 								key={d}
@@ -300,7 +300,7 @@ export default function Editor() {
 						>
 							{blocks.length === 0 ? (
 								<p className="py-16 text-center text-sm text-gray-400">
-									L'aperçu de votre site apparaîtra ici.
+									Your site preview will appear here.
 								</p>
 							) : (
 								<div className="flex flex-col gap-4">

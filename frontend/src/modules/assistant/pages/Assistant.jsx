@@ -41,7 +41,7 @@ export default function Assistant() {
 		setError('')
 		setResult(null)
 		try {
-			const preferences = [`couleur ${color}`, contact ? 'formulaire de contact' : '']
+			const preferences = [`color ${color}`, contact ? 'contact form' : '']
 				.filter(Boolean)
 				.join(', ')
 			const r = await getRecommendations({ category: sector, style, preferences })
@@ -69,15 +69,15 @@ export default function Assistant() {
 
 	return (
 		<AppShell
-			title="Assistant de démarrage"
-			subtitle="Quelques questions pour des recommandations personnalisées"
+			title="Startup Assistant"
+			subtitle="A few questions for personalized recommendations"
 		>
 			<div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
 				<form
 					onSubmit={submit}
 					className="flex flex-col gap-4 rounded-2xl border border-light-white3 bg-light-white1 p-5"
 				>
-					<Field label="Quel est le secteur de votre activité ?">
+					<Field label="What is your business sector?">
 						<select className={selectClass} value={sector} onChange={(e) => setSector(e.target.value)}>
 							{SECTORS.map((s) => (
 								<option key={s} value={s} className="capitalize">
@@ -87,7 +87,7 @@ export default function Assistant() {
 						</select>
 					</Field>
 
-					<Field label="Quel style préférez-vous ?">
+					<Field label="Which style do you prefer?">
 						<select className={selectClass} value={style} onChange={(e) => setStyle(e.target.value)}>
 							{STYLES.map((s) => (
 								<option key={s} value={s}>
@@ -97,7 +97,7 @@ export default function Assistant() {
 						</select>
 					</Field>
 
-					<Field label="Couleur dominante souhaitée ?">
+					<Field label="Preferred main color?">
 						<select className={selectClass} value={color} onChange={(e) => setColor(e.target.value)}>
 							{COLORS.map((c) => (
 								<option key={c} value={c}>
@@ -114,11 +114,11 @@ export default function Assistant() {
 							onChange={(e) => setContact(e.target.checked)}
 							className="h-4 w-4 accent-[color:var(--color-light-red1,#c0392b)]"
 						/>
-						Besoin d'un formulaire de contact
+						Need a contact form
 					</label>
 
 					<Button type="submit" variant="primary" fullWidth isLoading={loading}>
-						Obtenir des recommandations
+						Get recommendations
 					</Button>
 				</form>
 
@@ -129,18 +129,18 @@ export default function Assistant() {
 						</div>
 					) : null}
 
-					{loading ? <LoadingSpinner theme="light" label="Analyse de vos réponses..." /> : null}
+					{loading ? <LoadingSpinner theme="light" label="Analyzing your answers..." /> : null}
 
 					{!loading && !result ? (
 						<div className="rounded-2xl border border-dashed border-light-white3 p-10 text-center text-sm text-light-white4">
-							Remplissez le questionnaire pour voir vos recommandations.
+							Fill out the questionnaire to see your recommendations.
 						</div>
 					) : null}
 
 					{result ? (
 						<div className="flex flex-col gap-6">
 							<section>
-								<h2 className="mb-3 text-lg font-semibold">Templates recommandés</h2>
+								<h2 className="mb-3 text-lg font-semibold">Recommended templates</h2>
 								<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 									{templates.map((t) => (
 										<article
@@ -151,7 +151,7 @@ export default function Assistant() {
 											<p className="mt-1 text-sm text-light-white4">{t.reason}</p>
 											<div className="mt-3 flex items-center gap-2">
 												<Button variant="primary" size="sm" onClick={() => useTemplate(t.id)}>
-													Utiliser
+													Use
 												</Button>
 												<button
 													type="button"
@@ -185,7 +185,7 @@ export default function Assistant() {
 
 							{palette ? (
 								<section>
-									<h2 className="mb-2 text-lg font-semibold">Palette suggérée</h2>
+									<h2 className="mb-2 text-lg font-semibold">Suggested palette</h2>
 									<div className="rounded-2xl border border-light-white3 bg-light-white1 p-4">
 										<p className="text-sm font-medium">{palette.id}</p>
 										<p className="mt-1 text-sm text-light-white4">{palette.reason}</p>
@@ -207,13 +207,13 @@ export default function Assistant() {
 
 							{fonts ? (
 								<section>
-									<h2 className="mb-2 text-lg font-semibold">Polices suggérées</h2>
+									<h2 className="mb-2 text-lg font-semibold">Suggested fonts</h2>
 									<div className="rounded-2xl border border-light-white3 bg-light-white1 p-4 text-sm">
 										<p>
-											<span className="text-light-white4">Titres :</span> {fonts.heading}
+											<span className="text-light-white4">Headings:</span> {fonts.heading}
 										</p>
 										<p className="mt-1">
-											<span className="text-light-white4">Corps :</span> {fonts.body}
+											<span className="text-light-white4">Body:</span> {fonts.body}
 										</p>
 										{fonts.reason ? (
 											<p className="mt-2 text-light-white4">{fonts.reason}</p>

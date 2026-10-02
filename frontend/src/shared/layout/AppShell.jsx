@@ -7,7 +7,7 @@ const NAV = [
 	{ to: '/dashboard', label: 'Dashboard' },
 	{ to: '/templates', label: 'Templates' },
 	{ to: '/assistant', label: 'Assistant' },
-	{ to: '/media', label: 'Média' },
+	{ to: '/media', label: 'Media' },
 ]
 
 export default function AppShell({ title, subtitle, actions, children }) {
@@ -40,7 +40,7 @@ export default function AppShell({ title, subtitle, actions, children }) {
 						))}
 					</nav>
 					<Button variant="outline" size="sm" onClick={onLogout}>
-						Déconnexion
+						Log out
 					</Button>
 				</div>
 			</header>
