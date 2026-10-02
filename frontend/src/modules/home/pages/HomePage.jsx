@@ -59,6 +59,7 @@ function HomePage() {
 							<Link to="/register">
 								<Button variant="signup" size="sm" className="h-10! px-6!">Start</Button>
 							</Link>
+							<a href="#capabilities">
 							<Button
 								variant="demo"
 								size="sm"
@@ -66,6 +67,7 @@ function HomePage() {
 							>
 								Demo
 							</Button>
+							</a>
 						</div>
 					</div>
 
@@ -163,7 +165,9 @@ function HomePage() {
 								Design, deploy, iterate and grow with Sidi AI.
 							</p>
 							<div className="mt-7 flex items-center justify-center">
-								<Button variant="signup" size="sm" className="h-10! px-7!">Start for free</Button>
+								<Link to="/register">
+									<Button variant="signup" size="sm" className="h-10! px-7!">Start for free</Button>
+								</Link>
 							</div>
 						</div>
 					</div>
