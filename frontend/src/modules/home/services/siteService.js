@@ -3,26 +3,41 @@ import { getToken, clearToken } from '../../auth/services/authService'
 const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 const SITES_ENDPOINT = API_BASE_URL ? `${API_BASE_URL}/sites` : '/sites'
 
+function errorMessage(payload, status) {
+	if (payload && typeof payload === 'object') {
+		const d = payload.detail
+		if (typeof d === 'string') return d
+		if (Array.isArray(d) && d[0]?.msg) return d[0].msg
+		if (payload.message) return payload.message
+	}
+	if (status >= 500) return 'Le serveur a rencontré une erreur, veuillez réessayer plus tard'
+	return `La requête a échoué (${status})`
+}
+
 async function request(url, options = {}) {
 	const token = getToken()
-	const response = await fetch(url, {
-		headers: {
-			'Content-Type': 'application/json',
-			...(token ? { Authorization: `Bearer ${token}` } : {}),
-			...(options.headers || {})
-		},
-		...options
-	})
+	let response
+	try {
+		response = await fetch(url, {
+			headers: {
+				'Content-Type': 'application/json',
+				...(token ? { Authorization: `Bearer ${token}` } : {}),
+				...(options.headers || {})
+			},
+			...options
+		})
+	} catch {
+		throw new Error('Impossible de contacter le serveur. Vérifiez votre connexion et réessayez.')
+	}
 
 	if (response.status === 401) {
 		clearToken()
 		if (typeof window !== 'undefined') window.location.assign('/login')
-		throw new Error('Session expired. Please log in again.')
+		throw new Error('Votre session a expiré, veuillez vous reconnecter')
 	}
 
 	let payload = null
 	const contentType = response.headers.get('content-type') || ''
-
 	if (contentType.includes('application/json')) {
 		payload = await response.json()
 	} else {
@@ -31,10 +46,7 @@ async function request(url, options = {}) {
 	}
 
 	if (!response.ok) {
-		const message =
-			(typeof payload === 'object' && payload && payload.message) ||
-			`Request failed (${response.status})`
-		throw new Error(message)
+		throw new Error(errorMessage(payload, response.status))
 	}
 
 	return payload
